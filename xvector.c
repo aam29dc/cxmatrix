@@ -1,11 +1,11 @@
 #include "xvector.h"
 
 bool compare_greaterthan_double(const void* const left, const void* const right) {
-    return *(double*)left > *(double*)right;
+	return *(double*)left > *(double*)right;
 }
 
 bool compare_greaterthan_size_t(const void* const left, const void* const right) {
-    return *(size_t*)left > *(size_t*)right;
+	return *(size_t*)left > *(size_t*)right;
 }
 
 double vector_angle(const double* const A, const double* const B, const size_t length, ERR* const err) {
@@ -26,7 +26,7 @@ int vector_abs(double* const A, const size_t length) {
 	if (A == NULL) return ERR_NUL;
 
 	for (; i < length; i++){
-        if(A[i] < 0) A[i] = -A[i];
+		if(A[i] < 0) A[i] = -A[i];
 	}
 	return 0;
 }
@@ -45,20 +45,20 @@ int vector_add_m_array(const double** const A, const size_t* const Alengths, con
 	size_t i = 0;
 	size_t j = 0;
 	size_t max_length = 0;
-    ERR err = 0;
+	ERR err = 0;
 
 	if (A == NULL || Alengths == NULL || R == NULL || Rsize == NULL) return ERR_NUL;
 
 	max_length = *(double*)g_vector_retMax(&Alengths, length, sizeof(double), compare_greaterthan_double, 1, &err); /* rewrite vector_retMax as generic */
 
-    if (*Rsize != max_length) {
-        if ((*R = (double*)malloc(sizeof(double)*max_length)) == NULL) return ERR_INIT;
-    }
+	if (*Rsize != max_length) {
+        	if ((*R = (double*)malloc(sizeof(double)*max_length)) == NULL) return ERR_INIT;
+	}
 
-    for (i=0; i < length; i++) {
-        for (j=0;j < Alengths[i]; j++){
-            *R[j] += *A[j];
-        }
+	for (i=0; i < length; i++) {
+		for (j=0;j < Alengths[i]; j++){
+			*R[j] += *A[j];
+		}
 	}
 
 	return 0;
@@ -85,7 +85,7 @@ int vector_subtract_m(const double* const A, const size_t Alength, const double*
 	if (A == NULL || B == NULL || R == NULL || Rsize == NULL) return ERR_NUL;
 	if (Alength != Blength) return ERR_DIM;
 
-    REALLOCATE(*R, *Rsize, Alength);
+	REALLOCATE(*R, *Rsize, Alength);
 
 	for (; i < Alength; i++) {
 		*R[i] = A[i] - B[i];
@@ -174,7 +174,7 @@ double vector_distance(const double* const A, const double* const B, const size_
 }
 
 int g_vector_swapEntrys(void* const arr, const size_t arr_length, const size_t type_size, const size_t x, const size_t y, const size_t length, const size_t incr){
-	
+	return 0;
 }
 
 int vector_swapEntrys(double* const A, const size_t Alength, const size_t x, const size_t y, const size_t length, const size_t incr) {
@@ -252,7 +252,7 @@ int vector_setEntrysEqual(const double* const A, const size_t Alength, double* c
 
 	if (A == NULL || R == NULL) return ERR_NUL;
 	if (length > Alength || length > Rlength) return ERR_PARA;
-    if (incr == 0) return ERR_ZERO;
+	if (incr == 0) return ERR_ZERO;
 
 	for (; i < length; i+=incr) {
 		R[i] = A[i];
