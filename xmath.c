@@ -141,9 +141,7 @@ double xroot(const double base, const int root) {
 	while (x != base || numOfdecimalsf32(i) < F32SIGFIGS) {
 		x = xpow(i, root);
 
-
 		while (x < base) {
-
 			i += inc;
 			x = xpow(i, root);
 		}
