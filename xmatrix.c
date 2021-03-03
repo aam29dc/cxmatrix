@@ -46,7 +46,7 @@ int matrix_solveOrthogonal(const MATRIX* const Q, const double* const B, double*
 	if (Q == NULL || B == NULL || R == NULL || Rsize == NULL) return ERR_NUL;
 	if (matrix_isOrthogonal(Q) == false) return ERR_PARA;
 
-    REALLOCATE(*R, *Rsize, Q->rows);
+    	REALLOCATE(*R, *Rsize, Q->rows);
 
 	for (;i<Q->rows;i++){
 		matrix_getCol(Q,i,&col,&colsize);
@@ -68,7 +68,7 @@ int matrix_solveBackward(const MATRIX* const U, const double* const B, double** 
 	if (U == NULL || B == NULL || R == NULL || Rsize == NULL) return ERR_NUL;
 	if (matrix_isUpper(U) == false) return ERR_PARA;
 
-    REALLOCATE(*R, *Rsize, U->rows);
+    	REALLOCATE(*R, *Rsize, U->rows);
 
 	for (i = U->rows-1; i >= 0; i--){
 		if (U->m[(U->cols*i)+i]!=0){	//if coef in U is zero then skip, r value will stay zero
@@ -92,7 +92,7 @@ int matrix_solveForward(const MATRIX* const L, const double* const B, double** c
 	if (L == NULL || B == NULL || R == NULL || Rsize == NULL) return ERR_NUL;
 	if (matrix_isLower(L) == false) return ERR_PARA;
 
-    REALLOCATE(*R, *Rsize, L->rows);
+    	REALLOCATE(*R, *Rsize, L->rows);
 
 	for(;i<L->rows-1;i++){
 		if (L->m[(L->cols*i)+i]!=0){	//if coef in A is zero then skip, r value will stay zero
@@ -118,7 +118,7 @@ int matrix_solveSeidel(MATRIX* const A, double* const B, double** const R, size_
 	if (iter <= 0) return ERR_PARA;
 	if (matrix_isStrictDiagDom(A) == false) return ERR_PARA;		// otherwise check if diagonal entries are non-zero
 
-    REALLOCATE(*R, *Rsize, A->rows);
+    	REALLOCATE(*R, *Rsize, A->rows);
 
 	if ((prev_iter = (double*)malloc(sizeof(double)*(A->rows))) == NULL) return ERR_INIT;
 
@@ -454,10 +454,10 @@ int matrix_transpose(MATRIX* const A) {
 
 	if (A == NULL) return ERR_NUL;
 
-    if (A->rows == 1 || A-> cols == 1){         // if col or row vector, just swap A.cols and A.rows
-        xswap(&A->rows,&A->cols,sizeof(size_t));
-        return 0;
-    }
+	if (A->rows == 1 || A-> cols == 1){         // if col or row vector, just swap A.cols and A.rows
+		xswap(&A->rows,&A->cols,sizeof(size_t));
+		return 0;
+	}
 
 	if (matrix_init(&T, A->cols, A->rows,0)) return ERR_INIT;
 
@@ -587,7 +587,7 @@ int matrix_getDiagonal(const MATRIX* const A, double** R, size_t* const Rsize) {
 
 	n = A->cols <= A->rows ? A->cols : A->rows;
 
-    REALLOCATE(*R, *Rsize, n);
+    	REALLOCATE(*R, *Rsize, n);
 
 	for (;i<n;i++){
 		*R[i] = A->m[(A->cols*i)+i];
@@ -655,13 +655,13 @@ bool matrix_isOrthonormal(const MATRIX* const A) {
 
 	if (matrix_isOrthogonal(A) == false) return false;
 
-    for(;i<A->rows;i++){
-        magnitude = 0;
-        for(j=0;j<A->cols;j++){
-            magnitude += A->m[(A->cols*i)+j] * A->m[(A->cols*i)+j];
-        }
+	for(;i<A->rows;i++){
+		magnitude = 0;
+		for(j=0;j<A->cols;j++){
+			magnitude += A->m[(A->cols*i)+j] * A->m[(A->cols*i)+j];
+		}
         if(magnitude != 1) return false;
-    }
+	}
 
 	return true;
 }
