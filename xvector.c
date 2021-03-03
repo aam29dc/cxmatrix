@@ -41,29 +41,6 @@ int vector_negate(double* const A, const size_t length) {
 	return 0;
 }
 
-int vector_add_m_array(const double** const A, const size_t* const Alengths, const size_t length, double** R, size_t* const Rsize) {
-	size_t i = 0;
-	size_t j = 0;
-	size_t max_length = 0;
-	ERR err = 0;
-
-	if (A == NULL || Alengths == NULL || R == NULL || Rsize == NULL) return ERR_NUL;
-
-	max_length = *(double*)g_vector_retMax(&Alengths, length, sizeof(double), compare_greaterthan_double, 1, &err); /* rewrite vector_retMax as generic */
-
-	if (*Rsize != max_length) {
-        	if ((*R = (double*)malloc(sizeof(double)*max_length)) == NULL) return ERR_INIT;
-	}
-
-	for (i=0; i < length; i++) {
-		for (j=0;j < Alengths[i]; j++){
-			*R[j] += *A[j];
-		}
-	}
-
-	return 0;
-}
-
 int vector_add_m(const double* const A, const size_t Alength, const double* const B, const size_t Blength, double** R, size_t* Rsize) {
 	size_t i = 0;
 
