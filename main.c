@@ -6,9 +6,9 @@ int main(void) {
 	COORD coord = { 0 };
 	MATRIX V = { 0 };			// vertices matrix
 	MATRIX P = { 0 };			// projection matrix
-	MATRIX Rotatex = { 0 };		// rotation matrix
-	MATRIX Rotatey = { 0 };		// rotation matrix
-	MATRIX coords = { 0 };		// 2d coordinates matrix for vertices matrix
+	MATRIX Rotatex = { 0 };			// rotation matrix
+	MATRIX Rotatey = { 0 };			// rotation matrix
+	MATRIX coords = { 0 };			// 2d coordinates matrix for vertices matrix
 	size_t* adj = 0;
 
 	//vertices matrix setup
