@@ -167,31 +167,6 @@ double xroot(const double base, const int root) {
 	return x;
 }
 
-/*double xpowf(const double base, const double exp) {
-	int i = 0;
-	double equ = base;
-	double part = 0;
-
-	while (i < (int)exp) {
-		equ = equ * base;
-		i++;
-	}
-
-	i = 0;
-
-	// fractional part
-	while (i < numOfdecimalsf32(exp)) {
-
-		part = xpow(base, deciAtPos(exp, i));
-		part = xroot(part, (int)xpow(10, i));
-		equ *= part;
-
-		i++;
-	}
-
-	return equ;
-}*/
-
 int isOddi(const int x) {
 	return (x & 1) == 1 ? 1 : 0;
 }
@@ -209,11 +184,6 @@ int xceil(const double x) {
 	if (isNegi((int)x)) return (int)x;
 	else return (int)x + 1;
 }
-
-/*double xabsolf(const double x) {
-	if (x < 0) return -x;
-	else return x;
-}*/
 
 int absol(const int x) {
 	if (x < 0) return -x;
