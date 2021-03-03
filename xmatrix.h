@@ -14,8 +14,6 @@ typedef struct {
 }MATRIX;
 #endif
 
-typedef bool (*compare_func)(const void* const left, const void* const right);
-
 #define ROW_MAJOR   (1)
 
 // matrix operations
