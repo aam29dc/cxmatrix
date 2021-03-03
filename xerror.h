@@ -17,6 +17,4 @@ typedef enum ERR {
 
 extern const char* const ERR_MSG[];
 
-const char* print_err(const ERR err);
-
 #endif
