@@ -3,7 +3,7 @@
 #include "xadj.h"
 
 /*
- Projects the vertices of a 3d cube onto the screen using similar triangles.
+ Projects the vertices of a 3d cube onto the screen using similar triangles, rotates on X and Y axis.
 */
 
 int main(void) {
