@@ -7,7 +7,6 @@
 */
 
 int main(void) {
-	COORD coord = { 0 };
 	MATRIX V = { 0 };			// vertices matrix
 	MATRIX P = { 0 };			// projection matrix
 	MATRIX Rotatex = { 0 };			// rotation matrix
