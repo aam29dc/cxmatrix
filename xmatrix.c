@@ -124,7 +124,7 @@ int matrix_solveSeidel(MATRIX* const A, double* const B, double** const R, size_
 	if ((prev_iter = (double*)malloc(sizeof(double)*(A->rows))) == NULL) return ERR_INIT;
 
 	for (;k<iter;k++){
-		if (k != 0 && vector_setEntrysEqual(prev_iter, A->rows, *R, *Rsize, ROW_MAJOR)) return ERR_FUNC;
+		if (k != 0 && vector_setEntrysEqual(prev_iter, A->rows, *R, *Rsize, *Rsize, ROW_MAJOR)) return ERR_FUNC;
 
 		for (i = 0;i < A->rows;i++){
 			if (A->m[(A->cols*i)+i] != 0){
@@ -474,6 +474,12 @@ int matrix_transpose(MATRIX* const A) {
 
 	return 0;
 }
+
+#if 0
+static inline int matrix_add_m_array(MATRIX** A, const size_t Alength, MATRIX** R){
+    return vector_add_m_array(const double** const A, const size_t* const Alengths, const size_t length, double** R, size_t* const Rsize);
+}
+#endif
 
 int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const R) {
 	// R = A*B, A is left matrix, and B is right matrix

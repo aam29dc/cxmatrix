@@ -30,10 +30,6 @@ typedef unsigned int size_t;
         }\
     }while(0)
 
-typedef bool (*compare_func)(const void* const left, const void* const right);
-bool compare_double(const void* const left, const void* const right);
-bool compare_size_t(const void* const left, const void* const right);
-
 // vector_sort
 // vector_reverse
 int vector_abs(double* const A, const size_t length);
@@ -51,7 +47,7 @@ static inline double vector_length(const double* const A, const size_t length) {
 		err = ERR_NUL;
         return 0;
 	}
-	return sqrtf(vector_dotProduct(A,A,length,err));
+	return sqrtf(vector_dotProduct(A,A,length,&err));
 }
 int vector_swapEntrys(double* const A, const size_t Alength, const size_t x, const size_t y, const size_t length, const size_t incr);
 int vector_setList(double* const A, const size_t Alength, const char* const list);

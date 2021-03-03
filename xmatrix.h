@@ -5,20 +5,26 @@
 #include "xstring.h"
 #include "xmath.h"
 
+#ifndef _XMATRIX_STRUCT
+#define _XMATRIX_STRUCT
 typedef struct {
 	size_t rows;
 	size_t cols;
 	double* m;
 }MATRIX;
+#endif
 
 typedef bool (*compare_func)(const void* const left, const void* const right);
 
 #define ROW_MAJOR   (1)
 
 // matrix operations
+// matrix _rotate _translate _shear _reflection _
 int matrix_LUfactor(const MATRIX* const A, MATRIX* const R);
 int matrix_inverse(const MATRIX* const A, MATRIX* const R);
 int matrix_appendRHS(MATRIX* const A, const MATRIX* const B);
+//int matrix_gramschmidt(MATRIX* const A);
+//int matrix_equilibriumV
 int matrix_solveOrthogonal(const MATRIX* const Q, const double* const B, double** const R, size_t* const Rsize);
 int matrix_solveSeidel(MATRIX* const A, double* const B, double** const R, size_t* const Rsize, const size_t iter);
 int matrix_solveBackward(const MATRIX* const U, const double* const B, double** const R, size_t* const Rsize);
@@ -142,26 +148,26 @@ static inline double matrix_retRowMin(const MATRIX* const A, const size_t row, E
 	if (A == NULL || err == NULL) {
 		return 0;
 	}
-	return *(double*)g_vector_retMin((A->m)+(A->cols*row), A->cols, sizeof(double), compare_double, ROW_MAJOR, err);
+	return vector_retMin((A->m)+(A->cols*row), A->cols, ROW_MAJOR, err);
 }
 static inline double matrix_retColMin(const MATRIX* const A, const size_t col, ERR* const err) {
 	if (A == NULL || err == NULL) {
 		return 0;
 	}
-	return *(double*)g_vector_retMin(A->m+col, A->rows*A->cols, sizeof(double), compare_double, A->cols, err);
+	return vector_retMin(A->m+col, A->rows*A->cols, A->cols, err);
 }
 
 static inline double matrix_retRowMax(const MATRIX* const A, const size_t row, ERR* const err) {
 	if (A == NULL || err == NULL) {
 		return 0;
 	}
-	return *(double*)g_vector_retMax((A->m)+(A->cols*row), A->cols, sizeof(double), compare_double, ROW_MAJOR, err);
+	return vector_retMax((A->m)+(A->cols*row), A->cols, ROW_MAJOR, err);
 }
 static inline double matrix_retColMax(const MATRIX* const A, const size_t col, ERR* const err) {
 	if (A == NULL || err == NULL){
 		return 0;
 	}
-	return *(double*)g_vector_retMax(A->m+col, A->rows*A->cols, sizeof(double), compare_double, A->cols, err);
+	return vector_retMax(A->m+col, A->rows*A->cols, A->cols, err);
 }
 
 double matrix_retSparsity(const MATRIX* const A, ERR* const err);

@@ -231,11 +231,11 @@ int fillTriangle(int x1, int y1, int x2, int y2, int x3, int y3) {
 	return 0;
 }
 
-int matrix_print(const MATRIX* const A, const short offset) {
+int matrix_print(const MATRIX* const A, const short v_offset) {
 	#ifdef _WIN32
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	#endif
-	COORD coord = { 0,offset };
+	COORD coord = { 0,v_offset };
 	size_t i = 0;
 
 	if (A == NULL) return ERR_NUL;
@@ -249,13 +249,13 @@ int matrix_print(const MATRIX* const A, const short offset) {
 		printf(" %.4f ", A->m[i]);
 	}
 	printf("\n");
-	coord.X = 0;
+	/*coord.X = 0;
 	coord.Y = 0;
 	#ifdef _WIN32
 		SetConsoleCursorPosition(hConsole, coord);
 	#else
 		printf("\033[%d;%dH",coord.Y,coord.X);
-	#endif
+	#endif*/
 
 	return 0;
 }
