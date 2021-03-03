@@ -17,7 +17,7 @@ typedef unsigned int size_t;
 
 // adjacency list
 int adj_init(size_t** adj, const size_t size);
-int adj_set(size_t** const adj, const size_t size, const char* const list);
+int adj_setList(size_t** const adj, const size_t size, const char* const list);
 int adj_print(const size_t* const adj, const size_t rows, const size_t cols);
 
 #endif

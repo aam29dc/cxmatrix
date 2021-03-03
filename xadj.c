@@ -16,7 +16,7 @@ int adj_init(size_t** adj, const size_t size) {
 	return 0;
 }
 
-int adj_set(size_t** const adj, const size_t size, const char* const list) {
+int adj_setList(size_t** const adj, const size_t size, const char* const list) {
 	size_t i = 0;
 	size_t j = 0;
 	if (*adj == NULL) return 1;

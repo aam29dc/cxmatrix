@@ -48,9 +48,8 @@ void clearScreen(void) {
 	#endif
 	COORD coord = { 0 };		// 2d coordinates matrix
 
-	//#123:               ____
-	for (; coord.Y < HEIGHT * 5; coord.Y++) {
-		for (; coord.X < WIDTH * 5; coord.X++) {
+	for (; coord.Y < HEIGHT; coord.Y++) {
+		for (coord.X = 0; coord.X < WIDTH; coord.X++) {
 			#ifdef _WIN32
 				SetConsoleCursorPosition(hConsole, coord);
 			#else

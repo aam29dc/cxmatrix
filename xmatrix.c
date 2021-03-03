@@ -475,6 +475,12 @@ int matrix_transpose(MATRIX* const A) {
 	return 0;
 }
 
+#if 0
+static inline int matrix_add_m_array(MATRIX** A, const size_t Alength, MATRIX** R){
+    return vector_add_m_array(const double** const A, const size_t* const Alengths, const size_t length, double** R, size_t* const Rsize);
+}
+#endif
+
 int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const R) {
 	// R = A*B, A is left matrix, and B is right matrix
 	// A.rows = B.cols , A.cols = B.rows
@@ -498,10 +504,10 @@ int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const 
 	}
 
 	if (R->cols*R->rows == A->rows*B->cols) {			// check if R is already allocated
-	    if (matrix_setEqualValues(R, &temp)) return ERR_FUNC;
+	    if (matrix_setEqualValues(&temp, R)) return ERR_FUNC;
 	}
 	else {
-		if (matrix_setEqualMatrix(R, &temp)) return ERR_FUNC;
+		if (matrix_setEqualMatrix(&temp, R)) return ERR_FUNC;
 	}
 
 	matrix_free_data(&temp);

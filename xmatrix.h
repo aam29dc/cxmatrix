@@ -14,6 +14,8 @@ typedef struct {
 }MATRIX;
 #endif
 
+typedef bool (*compare_func)(const void* const left, const void* const right);
+
 #define ROW_MAJOR   (1)
 
 // matrix operations
@@ -93,6 +95,12 @@ int matrix_free_data(MATRIX* const A);
 static inline int matrix_setList(MATRIX* const A, const char* const list) {
 	if (A == NULL || list == NULL) return ERR_NUL;
 	return vector_setList(A->m, A->rows*A->cols, list);
+}
+
+static inline int matrix_setEntry(MATRIX* const A, const size_t row, const size_t col, const float val) {
+    if (A == NULL) return ERR_NUL;
+    if (row > A->rows || col > A->cols) return ERR_PARA;
+    return vector_setAll((A->m)+(A->cols*row)+col, 1, val, ROW_MAJOR);
 }
 
 static inline int matrix_setAllRow(MATRIX* const A, const size_t row, const float val) {
