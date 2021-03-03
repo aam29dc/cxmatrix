@@ -1,5 +1,5 @@
 # cxmatrix
-c matrix library is ROW MAJOR,
+cxmatrix library is ROW MAJOR,
 has automatic dynamic memory allocation,
 contains a list of linear algebra functions to solve matrix equations,
 
