@@ -17,12 +17,9 @@ typedef struct {
 #define ROW_MAJOR   (1)
 
 // matrix operations
-// matrix _rotate _translate _shear _reflection _
 int matrix_LUfactor(const MATRIX* const A, MATRIX* const R);
 int matrix_inverse(const MATRIX* const A, MATRIX* const R);
 int matrix_appendRHS(MATRIX* const A, const MATRIX* const B);
-//int matrix_gramschmidt(MATRIX* const A);
-//int matrix_equilibriumV
 int matrix_solveOrthogonal(const MATRIX* const Q, const double* const B, double** const R, size_t* const Rsize);
 int matrix_solveSeidel(MATRIX* const A, double* const B, double** const R, size_t* const Rsize, const size_t iter);
 int matrix_solveBackward(const MATRIX* const U, const double* const B, double** const R, size_t* const Rsize);
