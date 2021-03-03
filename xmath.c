@@ -119,19 +119,6 @@ double xcosine(double degree) {
 	else return xtaylorsine(xfmod(degree, 90));
 }
 
-/*int ipow(const int base, const int exp) {
-	int i = 1;
-	double equ = base;
-
-	if (exp == 0) return 1;
-
-	while (i < exp) {
-		equ *= base;
-		i++;
-	}
-	return equ;
-}*/
-
 double xpow(const double base, const int exp) {
 	int i = 0;
 	double equ = base;
