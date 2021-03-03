@@ -51,7 +51,8 @@ int matrix_solveOrthogonal(const MATRIX* const Q, const double* const B, double*
 	for (;i<Q->rows;i++){
 		matrix_getCol(Q,i,&col,&colsize);
 		*R[i] = vector_dotProduct(B,col,colsize,&err);
-		if ((denominator = vector_dotProduct(col,col,colsize,&err)) == 0) { return ERR_DIVZ;}		// if matrix is orthonormal, then denom = 1 for all, and this step can be skipped
+		/* if matrix is orthonormal, then denom = 1 for all, and this step can be skipped */
+		if ((denominator = vector_dotProduct(col,col,colsize,&err)) == 0) { return ERR_DIVZ;}
 		else { *R[i] /= denominator; }
 	}
 
@@ -95,9 +96,9 @@ int matrix_solveForward(const MATRIX* const L, const double* const B, double** c
     	REALLOCATE(*R, *Rsize, L->rows);
 
 	for(;i<L->rows-1;i++){
-		if (L->m[(L->cols*i)+i]!=0){	//if coef in A is zero then skip, r value will stay zero
+		if (L->m[(L->cols*i)+i] != 0) {	//if coef in A is zero then skip, r value will stay zero
 			*R[i] = B[i];
-			for (j=0;j<i-1;j++){
+			for (j=0; j < i-1;j++) {
 				*R[i] += *R[j] * (L->m[(L->cols*i)+j]);
 			}
 			*R[i] /= L->m[(L->cols*i)+i];
@@ -154,7 +155,7 @@ int matrix_obtain3dCoords(MATRIX* const A) {
 
 	for (j = 0; j < A->cols; j++) {
 		for (i = 0; i < A->rows - 1; i++) {
-			if (((A->cols * 3) + j) == 0) break;	// if 4th entry of col vector is 0, skip
+			if (((A->cols * 3) + j) == 0) break;			// if 4th entry of col vector is 0, skip
 			A->m[(i * A->cols) + j] /= A->m[(A->cols * 3) + j];
 		}
 		A->m[(A->cols * 3) + j] = 1;
@@ -199,7 +200,7 @@ static int matrix_zeroBelowPivot(MATRIX* const A, const size_t row, const size_t
 	if (lcoef != 0) {		//	dont divide by zero
 		for (; j < A->rows - row - 1; j++) {
 			factor = A->m[((row + 1 + j) * A->cols) + col];
-			if (factor != 0) {		// skip row if factor is zero
+			if (factor != 0) {					// skip row if factor is zero
 				for (i = 0; i < A->cols - col; i++) {
 					A->m[((row + 1 + j) * A->cols) + col + i] -= factor * (A->m[(row * A->cols) + col + i] / lcoef);
 				}
@@ -251,7 +252,7 @@ int matrix_LUfactor(const MATRIX* const A, MATRIX* const R) {
 	while (i < A->cols - 1) {
 		if (B.m[(B.cols * i) + i] == 0) return ERR_COMP;			//check if pivot is zero
 		if (matrix_setEqualCol(&B, R, i)) return ERR_FUNC;			//copy whole pivot column
-		if (matrix_zeroBelowPivot(&B, i, i)) return ERR_FUNC;		//zero entrys under diagonal using pivot
+		if (matrix_zeroBelowPivot(&B, i, i)) return ERR_FUNC;			//zero entrys under diagonal using pivot
 		i++;
 	}
 
@@ -454,7 +455,7 @@ int matrix_transpose(MATRIX* const A) {
 
 	if (A == NULL) return ERR_NUL;
 
-	if (A->rows == 1 || A-> cols == 1){         // if col or row vector, just swap A.cols and A.rows
+	if (A->rows == 1 || A-> cols == 1){         		// if col or row vector, just swap A.cols and A.rows
 		xswap(&A->rows,&A->cols,sizeof(size_t));
 		return 0;
 	}
@@ -492,7 +493,7 @@ int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const 
 	if (A->rows == 0 || A->cols == 0) return ERR_ZERO;
 	if (A->cols != B->rows) return ERR_DIM;
 
-    if (matrix_init(&temp, A->rows, B->cols,0)) return ERR_INIT;
+	if (matrix_init(&temp, A->rows, B->cols,0)) return ERR_INIT;
 
 	for (k = 0; k < A->rows; k++) {
 		for (j = 0; j < B->cols; j++) {
@@ -502,12 +503,12 @@ int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const 
 		}
 	}
 
-    if (R->cols*R->rows == A->rows*B->cols) {                  // check if already allocated
-        if (matrix_setEqualValues(R, &temp)) return ERR_FUNC;
-    }
-    else {
-        if (matrix_setEqualMatrix(R, &temp)) return ERR_FUNC;
-    }
+	if (R->cols*R->rows == A->rows*B->cols) {			// check if R is already allocated
+	    if (matrix_setEqualValues(R, &temp)) return ERR_FUNC;
+	}
+	else {
+		if (matrix_setEqualMatrix(R, &temp)) return ERR_FUNC;
+	}
 
 	matrix_free_data(&temp);
 
@@ -520,12 +521,12 @@ int matrix_init(MATRIX* const A, const size_t rows, const size_t cols, const dou
 	if (A == NULL) return ERR_NUL;
 	if (rows == 0 || cols == 0) return ERR_PARA;
 
-    if (A->rows * A->cols < rows*cols || A->rows * A->cols > rows*cols + X_MEMORY_RANGE) {
-        if (A->m != NULL) free(A->m);
-        if ((A->m = (double*)malloc(sizeof(double)*rows*cols)) == NULL) return ERR_INIT;
-    }
+	if (A->rows * A->cols < rows*cols || A->rows * A->cols > rows*cols + X_MEMORY_RANGE) {
+		if (A->m != NULL) free(A->m);
+		if ((A->m = (double*)malloc(sizeof(double)*rows*cols)) == NULL) return ERR_INIT;
+	}
 
-    A->rows = rows;
+	A->rows = rows;
 	A->cols = cols;
 
 	for (; i < rows * cols; i++) {
@@ -756,13 +757,13 @@ bool matrix_isSymmetric(const MATRIX* const A) {
 
 	if (A == NULL) return -ERR_NUL;
 	if (A->rows == 0 || A->cols == 0) return -ERR_ZERO;
-    if (A->cols != A->rows) return false;
+	if (A->cols != A->rows) return false;
 
-    for (;i<A->rows-1;i++) {
-        for (j=i+1;j<A->cols;j++) {
-            if (A->m[(A->cols*i)+j] != A->m[(A->cols*j)+i]) return false;
-        }
-    }
+	for (;i<A->rows-1;i++) {
+		for (j=i+1;j<A->cols;j++) {
+			if (A->m[(A->cols*i)+j] != A->m[(A->cols*j)+i]) return false;
+		}
+	}
 
 	return true;
 }
