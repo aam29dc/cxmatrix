@@ -10,6 +10,6 @@ in _oldmain.c (NOTE: shouldn't compile since im lazy, but same flow. I'll come b
 
 functions like matrix_inverse are slow solutions for large matrices, but I've kept them anyway, incase anyone wants to look at them.
 
-WIP: add array of matrices, multiply array of matrices, etc make lib work better for arrays of matrices.
+WIP
 
 _saved_deprecated.c is a bunch of deleted/rewritten functions saved
