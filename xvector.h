@@ -40,9 +40,7 @@ double vector_angle(const double* const A, const double* const B, const size_t l
 int vector_normalize(double* const A, const size_t length);
 double vector_dotProduct(const double* const A, const double* const B, const size_t length);
 static inline double vector_length(const double* const A, const size_t length) {
-	if (A == NULL) {
-        return 0;
-	}
+	if (A == NULL){ return 0; }
 	return sqrt(vector_dotProduct(A,A,length));
 }
 int vector_swapEntrys(double* const A, const size_t Alength, const size_t x, const size_t y, const size_t length, const size_t incr);
