@@ -44,4 +44,4 @@ and contains a list of linear algebra functions to solve matrix equations.
                                                             .
                                                             ·
                                                             .
-compiled with MSVC and GCC zero warnings 3/3/2021 5:58 PM EST
+compiled with MSVC /w4 and GCC zero warnings 3/3/2021 5:58 PM EST
