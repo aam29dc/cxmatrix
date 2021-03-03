@@ -2,7 +2,7 @@
 cxmatrix library is ROW MAJOR,
 has automatic dynamic memory allocation,
 contains a list of linear algebra functions to solve matrix equations,
-also contains xmath, xstring header files I've created to learn.
+also contains xmath, xstring header files I've created to learn. x prefix.
 
 cxmatrix was written by me (aam29dc@gmail.com) to learn linear algebra.
 
