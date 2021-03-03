@@ -738,7 +738,7 @@ bool matrix_isIdentity(const MATRIX* const A) {
 	if (A->rows != A->cols) return false;
 
 	for (; i < A->cols; i++) {		// check diagonal
-        if (A->m[(A->cols*i)+i] != 1) return false;
+		if (A->m[(A->cols*i)+i] != 1) return false;
 	}
 
 	for (i=0;i<A->rows;i++) {			// check non-diagonals
