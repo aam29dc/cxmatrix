@@ -10,7 +10,7 @@ int adj_init(size_t** adj, const size_t size) {
 	if ((*adj = malloc(sizeof(size_t) * size)) == NULL) return ERR_MEM;	// dont need cast
 
 	for (; i < size; i++) {
-			(*adj)[i] = i + 1;
+		(*adj)[i] = i + 1;
 	}
 
 	return 0;
