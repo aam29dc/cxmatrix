@@ -69,6 +69,12 @@ int main(void) {
         	#endif
 
 	}
+	
+	matrix_free_data(&V);
+	matrix_free_data(&P);
+	matrix_free_data(&Rotatex);
+	matrix_free_data(&Rotatey);
+	matrix_free_data(&coords);
 
 	return 0;
 }
