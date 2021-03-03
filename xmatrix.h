@@ -2,7 +2,6 @@
 #define _XMATRIX_H
 
 #include "xvector.h"
-#include "xerror.h"
 #include "xstring.h"
 #include "xmath.h"
 
