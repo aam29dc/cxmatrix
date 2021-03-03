@@ -3,8 +3,8 @@
 int drawAxis(const short div) {
 	#ifdef _WIN32
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    #else
-        printf("\e[8;%d;%dt",HEIGHT,WIDTH);     // attempt to resize the window
+	#else
+		printf("\e[8;%d;%dt",HEIGHT,WIDTH);     // attempt to resize the window
 	#endif
 	COORD coord = { 0 };
 	coord.Y = SHIFT;
