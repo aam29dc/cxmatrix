@@ -2,6 +2,10 @@
 #include "xmatrix.h"
 #include "xadj.h"
 
+/*
+ Projects a the vertices of a 3d cube onto the screen using similar triangles.
+*/
+
 int main(void) {
 	COORD coord = { 0 };
 	MATRIX V = { 0 };			// vertices matrix
