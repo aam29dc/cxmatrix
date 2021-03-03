@@ -26,7 +26,7 @@ and contains a list of linear algebra functions to solve matrix equations.
                                                   ≡     ≡   ·   ≡     ≡
                                                   ≡     ≡   ░   ≡     ≡
                                                   ≡     ≡   ·   ≡     ≡
-					  ░·░·░·░·≡·░·░·≡·░·░·░·≡·░·░·≡·░·░·░·░
+					    ░·░·░·░·≡·░·░·≡·░·░·░·≡·░·░·≡·░·░·░·░
                                                   ≡     ≡   ░   ≡     ≡
                                                   ≡     ≡   ·   ≡     ≡
                                                   ≡     O≡≡≡≡≡≡≡O     ≡
