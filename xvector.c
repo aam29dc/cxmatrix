@@ -134,13 +134,6 @@ int vector_normalize(double* const A, const size_t length){
 	return 0;
 }
 
-double vector_projection(const double* const A, const double* const B, double** const R, size_t* const length){
-	if (A == NULL || B == NULL || R == NULL || length == NULL) return ERR_NUL;
-
-	//if(*length !=
-    return 0;
-}
-
 double vector_dotProduct(const double* const A, const double* const B, const size_t length, ERR* const err) {
 	size_t i = 0;
 	double result = 0;
@@ -171,10 +164,6 @@ double vector_distance(const double* const A, const double* const B, const size_
 	}
 
 	return sqrtf(result);
-}
-
-int g_vector_swapEntrys(void* const arr, const size_t arr_length, const size_t type_size, const size_t x, const size_t y, const size_t length, const size_t incr){
-	return 0;
 }
 
 int vector_swapEntrys(double* const A, const size_t Alength, const size_t x, const size_t y, const size_t length, const size_t incr) {
