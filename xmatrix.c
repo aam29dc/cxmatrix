@@ -71,8 +71,8 @@ int matrix_solveBackward(const MATRIX* const U, const double* const B, double** 
 
     	REALLOCATE(*R, *Rsize, U->rows);
 
-	for (i = U->rows-1; i >= 0; i--){
-		if (U->m[(U->cols*i)+i]!=0){	//if coef in U is zero then skip, r value will stay zero
+	for (i = U->rows-1; i >= 0; i--) {
+		if (U->m[(U->cols*i)+i] != 0) {	//if coef in U is zero then skip, r value will stay zero
 			*R[i] = B[i];
 			// negative increment sum S: from:(j=2) down to:( i+1): S(x_j)*(a_ij)
 			for(j=U->rows-1;(int)j>i;j--){
@@ -656,12 +656,12 @@ bool matrix_isOrthonormal(const MATRIX* const A) {
 
 	if (matrix_isOrthogonal(A) == false) return false;
 
-	for(;i<A->rows;i++){
+	for(;i<A->rows;i++) {
 		magnitude = 0;
-		for(j=0;j<A->cols;j++){
+		for(j=0;j<A->cols;j++) {
 			magnitude += A->m[(A->cols*i)+j] * A->m[(A->cols*i)+j];
 		}
-        if(magnitude != 1) return false;
+		if(magnitude != 1) return false;
 	}
 
 	return true;
@@ -696,9 +696,9 @@ bool matrix_isStochastic(const MATRIX* const A) {
 	if(A == NULL) return -ERR_NUL;
 	if(A->rows != A->cols) return -ERR_DIM;
 
-	for(;i<A->cols;i++){
+	for(;i<A->cols;i++) {
 		sum = 0;
-		for(j=0;j<A->rows;j++){
+		for(j=0;j<A->rows;j++) {
 			sum += A->m[(A->cols*j)+i];
 		}
 		if(sum!=1) return false;
@@ -742,10 +742,10 @@ bool matrix_isIdentity(const MATRIX* const A) {
 	}
 
 	for (i=0;i<A->rows;i++) {			// check non-diagonals
-        for (j=i+1;j<A->cols;j++) {
-            if (A->m[(A->cols*i)+j] != 0) return false;
-        }
-    }
+		for (j=i+1;j<A->cols;j++) {
+			if (A->m[(A->cols*i)+j] != 0) return false;
+		}
+	}
 
 	return true;
 }
