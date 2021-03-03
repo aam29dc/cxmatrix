@@ -32,30 +32,6 @@ int vector_negate(double* const A, const size_t length) {
 	}
 	return 0;
 }
-#if 0
-int vector_add_m_array(const double** const A, const size_t* const Alengths, const size_t length, double** R, size_t* const Rsize) {
-	size_t i = 0;
-	size_t j = 0;
-	size_t max_length = 0;
-	ERR err = 0;
-
-	if (A == NULL || Alengths == NULL || R == NULL || Rsize == NULL) return ERR_NUL;
-
-	max_length = *(double*)g_vector_retMax(&Alengths, length, sizeof(double), compare_greaterthan_double, 1, &err); /* rewrite vector_retMax as generic */
-
-	if (*Rsize != max_length) {
-        	if ((*R = (double*)malloc(sizeof(double)*max_length)) == NULL) return ERR_INIT;
-	}
-
-	for (i=0; i < length; i++) {
-		for (j=0;j < Alengths[i]; j++){
-			*R[j] += *A[j];
-		}
-	}
-
-	return 0;
-}
-#endif
 
 int vector_add(const double* const A, const size_t Alength, const double* const B, const size_t Blength, double** R, size_t* Rsize) {
 	size_t i = 0;
@@ -126,13 +102,6 @@ int vector_normalize(double* const A, const size_t length){
 	return 0;
 }
 
-double vector_projection(const double* const A, const double* const B, double** const R, size_t* const length){
-	if (A == NULL || B == NULL || R == NULL || length == NULL) return ERR_NUL;
-
-	//if(*length !=
-    return 0;
-}
-
 double vector_dotProduct(const double* const A, const double* const B, const size_t length, ERR* const err) {
 	size_t i = 0;
 	double result = 0;
@@ -163,10 +132,6 @@ double vector_distance(const double* const A, const double* const B, const size_
 	}
 
 	return sqrtf(result);
-}
-
-int g_vector_swapEntrys(void* const arr, const size_t arr_length, const size_t type_size, const size_t x, const size_t y, const size_t length, const size_t incr){
-	return 0;
 }
 
 int vector_swapEntrys(double* const A, const size_t Alength, const size_t x, const size_t y, const size_t length, const size_t incr) {
