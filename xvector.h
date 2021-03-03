@@ -2,11 +2,9 @@
 #define _XVECTOR_H
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include <math.h>
 #include "xerror.h"
-
-typedef int bool;
-enum { false = 0, true = 1 };
 
 #ifndef _SIZE_T_DEFINED
 #define _SIZE_T_DEFINED
@@ -40,14 +38,12 @@ int vector_multiply_s(double* const A, const size_t length, const double scalar,
 int vector3_cross(const double* const A, const double* const B, double** const R, size_t* const length);
 double vector_angle(const double* const A, const double* const B, const size_t length, ERR* const err);
 int vector_normalize(double* const A, const size_t length);
-double vector_dotProduct(const double* const A, const double* const B, const size_t length, ERR* const err);
+double vector_dotProduct(const double* const A, const double* const B, const size_t length);
 static inline double vector_length(const double* const A, const size_t length) {
-	ERR err = 0;
 	if (A == NULL) {
-		err = ERR_NUL;
         return 0;
 	}
-	return sqrtf(vector_dotProduct(A,A,length,&err));
+	return sqrt(vector_dotProduct(A,A,length));
 }
 int vector_swapEntrys(double* const A, const size_t Alength, const size_t x, const size_t y, const size_t length, const size_t incr);
 int vector_setList(double* const A, const size_t Alength, const char* const list);

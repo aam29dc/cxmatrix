@@ -2,7 +2,6 @@
 
 double vector_angle(const double* const A, const double* const B, const size_t length, ERR* const err) {
 	if (A == NULL || B == NULL || err == NULL) {
-		*err = ERR_NUL;
 		return 0;
 	}
 	if (length == 0) {
@@ -10,7 +9,7 @@ double vector_angle(const double* const A, const double* const B, const size_t l
 		return 0;
 	}
 
-	return acos(vector_dotProduct(A,B,length,err) / (vector_length(A,length)*vector_length(B,length)));
+	return acos(vector_dotProduct(A,B,length) / (vector_length(A,length)*vector_length(B,length)));
 }
 
 int vector_abs(double* const A, const size_t length) {
@@ -102,12 +101,11 @@ int vector_normalize(double* const A, const size_t length){
 	return 0;
 }
 
-double vector_dotProduct(const double* const A, const double* const B, const size_t length, ERR* const err) {
+double vector_dotProduct(const double* const A, const double* const B, const size_t length) {
 	size_t i = 0;
 	double result = 0;
 
-	if (A == NULL || B == NULL || err == NULL) {
-		*err = ERR_NUL;
+	if (A == NULL || B == NULL) {
 		return 0;
 	}
 
@@ -123,7 +121,6 @@ double vector_distance(const double* const A, const double* const B, const size_
 	double result = 0;
 
 	if (A == NULL || B == NULL || err == NULL) {
-		*err = ERR_NUL;
 		return 0;
 	}
 
@@ -131,7 +128,7 @@ double vector_distance(const double* const A, const double* const B, const size_
 		result += (A[i] - B[i]) * (A[i] - B[i]);
 	}
 
-	return sqrtf(result);
+	return sqrt(result);
 }
 
 int vector_swapEntrys(double* const A, const size_t Alength, const size_t x, const size_t y, const size_t length, const size_t incr) {
@@ -181,7 +178,7 @@ int vector_setList(double* const A, const size_t Alength, const char* const list
 		}
 
 		num = num * 10;
-		num = num + (list[i] - '0');
+		num += (double)list[i] - (double)'0';
 
 		i++;
 	}
@@ -251,7 +248,6 @@ double vector_retMax(const double* const A, const size_t length, const size_t in
 	double max = 0;
 
 	if (A == NULL || err == NULL) {
-		*err = ERR_NUL;
 		return 0;
 	}
 	if (incr == 0) {
@@ -273,7 +269,6 @@ double vector_retMin(const double* const A, const size_t length, const size_t in
 	double min = 0;
 
 	if (A == NULL || err == NULL) {
-		*err = ERR_NUL;
 		return 0;
 	}
 	if (incr == 0) {

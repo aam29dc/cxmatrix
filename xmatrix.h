@@ -62,11 +62,11 @@ static inline int matrix_multiply_s(const MATRIX* const A, const float scalar) {
 	if (A == NULL) return ERR_NUL;
 	return vector_multiply_s(A->m, A->rows*A->cols, scalar, ROW_MAJOR);
 }
-static inline int matrix_multiplyRow(const MATRIX* const A, const size_t row, const float factor) {
+static inline int matrix_multiplyRow(const MATRIX* const A, const size_t row, const double factor) {
 	if (A == NULL) return ERR_NUL;
 	return vector_multiply_s((A->m)+(A->cols*row), A->cols, factor, ROW_MAJOR);
 }
-static inline int matrix_multiplyCol(const MATRIX* const A, const size_t col, const float factor) {
+static inline int matrix_multiplyCol(const MATRIX* const A, const size_t col, const double factor) {
 	if (A == NULL) return ERR_NUL;
 	return vector_multiply_s((A->m)+col, A->rows*A->cols, factor, A->cols);
 }

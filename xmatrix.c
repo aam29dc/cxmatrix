@@ -38,7 +38,6 @@ int matrix_appendRHS(MATRIX* const A, const MATRIX* const B) {
 
 int matrix_solveOrthogonal(const MATRIX* const Q, const double* const B, double** const R, size_t* const Rsize) {
 	size_t i = 0;
-	ERR err = 0;
 	double denominator = 0;
 	double* col = 0;
 	size_t colsize = 0;
@@ -50,9 +49,9 @@ int matrix_solveOrthogonal(const MATRIX* const Q, const double* const B, double*
 
 	for (;i<Q->rows;i++){
 		matrix_getCol(Q,i,&col,&colsize);
-		*R[i] = vector_dotProduct(B,col,colsize,&err);
+		*R[i] = vector_dotProduct(B,col,colsize);
 		/* if matrix is orthonormal, then denom = 1 for all, and this step can be skipped */
-		if ((denominator = vector_dotProduct(col,col,colsize,&err)) == 0) { return ERR_DIVZ;}
+		if ((denominator = vector_dotProduct(col,col,colsize)) == 0) { return ERR_DIVZ;}
 		else { *R[i] /= denominator; }
 	}
 
@@ -244,12 +243,13 @@ int matrix_LUfactor(const MATRIX* const A, MATRIX* const R) {
 	if (A->rows != A->cols) return ERR_DIM;
 
 	if (matrix_setEqualMatrix(&B, A)) return ERR_INIT;
+	if (B.m == NULL) return ERR_NUL;
 
 	// R is compact form of LU with L lower form of R and U upper form
 	if (matrix_init(R, A->rows, A->cols, 0)) return ERR_INIT;
 
 	//EF(A) without row swaps, from top down, left to right, if 0 is along diagonal LU factor DNE
-	while (i < A->cols - 1) {
+	while (i < B.cols - 1) {
 		if (B.m[(B.cols * i) + i] == 0) return ERR_COMP;			//check if pivot is zero
 		if (matrix_setEqualCol(&B, R, i)) return ERR_FUNC;			//copy whole pivot column
 		if (matrix_zeroBelowPivot(&B, i, i)) return ERR_FUNC;			//zero entrys under diagonal using pivot
@@ -419,7 +419,6 @@ double matrix_determinate(const MATRIX* const A, ERR* const err) {
 
 	//determinate of square matrix of size n>=2 only, since A->rows = A->cols we only check A->rows
 	if (A == NULL || err == NULL) {
-		*err = ERR_NUL;
 		return 0;
 	}
 	if (A->rows == 0 || A->cols == 0) {
@@ -517,13 +516,14 @@ int matrix_init(MATRIX* const A, const size_t rows, const size_t cols, const dou
 
 	if (A->rows * A->cols < rows*cols || A->rows * A->cols > rows*cols + X_MEMORY_RANGE) {
 		if (A->m != NULL) free(A->m);
-		if ((A->m = (double*)malloc(sizeof(double)*rows*cols)) == NULL) return ERR_INIT;
+//#pragma warning (disable : 6386 ) /* disable unknown pragma warnings */
+		if ((A->m = (double*)malloc(sizeof(double)*(rows*cols))) == NULL) return ERR_INIT;
 	}
 
 	A->rows = rows;
 	A->cols = cols;
 
-	for (; i < rows * cols; i++) {
+	for (i=0; i < (A->rows * A->cols); i++) {
 		A->m[i] = val;
 	}
 
@@ -559,7 +559,6 @@ double matrix_retSparsity(const MATRIX* const A, ERR* const err) {
 	size_t zeros = 0;
 
 	if (A == NULL || err == NULL) {
-		*err = ERR_NUL;
 		return 0;
 	}
 	if (A->rows == 0 || A->cols == 0) {
@@ -767,7 +766,6 @@ double matrix_retTrace(const MATRIX* const A, ERR* const err) {
 	double result = 0;
 
 	if (A == NULL || err == NULL) {
-		*err = ERR_NUL;
 		return 0;
 	}
 	if (A->rows == 0 || A->cols == 0) {
