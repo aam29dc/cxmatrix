@@ -7,7 +7,16 @@ and contains a list of linear algebra functions to solve matrix equations.
 
 (3d cube on x and y axis, (z orthongonal to x and y))
 
-
+                                                            ░
+                                                            ·
+                                                            ░
+                                                            ·
+                                                            ░
+                                                            ·
+                                                            ░
+                                                            ·
+                                                            ░
+                                                            ·
                                                             ░
                                                             ·
                                                             ░
@@ -22,7 +31,7 @@ and contains a list of linear algebra functions to solve matrix equations.
                                                   ≡     ≡   ·   ≡     ≡
                                                   ≡     ≡   ░   ≡     ≡
                                                   ≡     ≡   ·   ≡     ≡
-                                              ░·░·≡·░·░·≡·░·░·░·≡·░·░·≡·░·░
+░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·≡·░·░·≡·░·░·░·≡·░·░·≡·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░·░
                                                   ≡     ≡   ░   ≡     ≡
                                                   ≡     ≡   ·   ≡     ≡
                                                   ≡     O≡≡≡≡≡≡≡O     ≡
@@ -32,6 +41,16 @@ and contains a list of linear algebra functions to solve matrix equations.
                                                   ≡ ≡       ░       ≡ ≡
                                                   ≡≡        ·        ≡≡
                                                   O≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡O
+                                                            ·
+                                                            ░
+                                                            ·
+                                                            ░
+                                                            ·
+                                                            ░
+                                                            ·
+                                                            ░
+                                                            ·
+                                                            ░
                                                             ·
                                                             ░
                                                             ·
