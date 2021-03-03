@@ -475,12 +475,6 @@ int matrix_transpose(MATRIX* const A) {
 	return 0;
 }
 
-#if 0
-static inline int matrix_add_m_array(MATRIX** A, const size_t Alength, MATRIX** R){
-    return vector_add_m_array(const double** const A, const size_t* const Alengths, const size_t length, double** R, size_t* const Rsize);
-}
-#endif
-
 int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const R) {
 	// R = A*B, A is left matrix, and B is right matrix
 	// A.rows = B.cols , A.cols = B.rows
@@ -675,15 +669,15 @@ bool matrix_isOrthogonal(const MATRIX* const A) {
 
 	if(A == NULL) return -ERR_NUL;
 
-    for (;i<A->rows;i++){
-        for (j=i+1;j<A->rows;j++){
-            sum = 0;
-            for (k=0;k<A->cols;k++){
-                sum += A->m[(A->cols*i)+k] * A->m[(A->cols*j)+k];
-            }
-            if (sum != 0) return false;
-        }
-    }
+	for (;i<A->rows;i++){
+		for (j=i+1;j<A->rows;j++){
+			sum = 0;
+			for (k=0;k<A->cols;k++){
+				sum += A->m[(A->cols*i)+k] * A->m[(A->cols*j)+k];
+			}
+			if (sum != 0) return false;
+		}
+	}
 
 	return true;
 }
