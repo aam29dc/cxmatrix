@@ -3,9 +3,6 @@
 #include "xadj.h"
 
 int main(void) {
-    #ifdef _WIN32
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    #endif
 	COORD coord = { 0 };
 	MATRIX V = { 0 };			// vertices matrix
 	MATRIX P = { 0 };			// projection matrix
@@ -60,11 +57,11 @@ int main(void) {
 		//	rotate vertices around y axis
 		matrix_multiply(&Rotatey, &V, &V);
 
-        #ifdef _WIN32
-            system("cls");
-        #else
-            clearScreen();
-        #endif
+		#ifdef _WIN32
+            		system("cls");
+        	#else
+            		clearScreen();
+        	#endif
 
 	}
 
