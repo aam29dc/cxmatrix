@@ -41,7 +41,7 @@ int vector_negate(double* const A, const size_t length) {
 	return 0;
 }
 
-int vector_add_m(const double* const A, const size_t Alength, const double* const B, const size_t Blength, double** R, size_t* Rsize) {
+int vector_add(const double* const A, const size_t Alength, const double* const B, const size_t Blength, double** R, size_t* Rsize) {
 	size_t i = 0;
 
 	if (A == NULL || B == NULL || R == NULL || Rsize == NULL) return ERR_NUL;
@@ -56,7 +56,7 @@ int vector_add_m(const double* const A, const size_t Alength, const double* cons
 	return 0;
 }
 
-int vector_subtract_m(const double* const A, const size_t Alength, const double* const B, const size_t Blength, double** R, size_t* Rsize) {
+int vector_subtract(const double* const A, const size_t Alength, const double* const B, const size_t Blength, double** R, size_t* Rsize) {
 	size_t i = 0;
 
 	if (A == NULL || B == NULL || R == NULL || Rsize == NULL) return ERR_NUL;
