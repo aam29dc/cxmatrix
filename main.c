@@ -2,11 +2,6 @@
 #include "xdraw.h"
 #include "xadj.h"
 
-/*
-	author: aam29dc@gmail.com
-	Projects the vertices of a 3d cube onto the screen using similar triangles, rotates on X and Y axis.
-*/
-
 int main(void) {
 	MATRIX V = { 0 };			// vertices matrix
 	MATRIX P = { 0 };			// projection matrix
@@ -16,7 +11,7 @@ int main(void) {
 	size_t* adj = 0;
 
 	//vertices matrix setup
-	matrix_init(&V, 4, 8, 0);
+	matrix_init(&V, 4, 8);
 	matrix_setList(&V, "5,-5,-5,5,""5,-5,-5,5,""5,5,-5,-5,""5,5,-5,-5,"
                 "5,5,5,5,""-4,-4,-4,-4,""1,1,1,1,""1,1,1,1,");
 
@@ -26,15 +21,16 @@ int main(void) {
              "0,0,0,0,0,1,0,1,""0,0,0,0,0,0,1,0,""0,0,0,0,0,0,0,1,""0,0,0,0,0,0,0,0,");
 
 	//projection matrix setup
-	matrix_init(&P, 4, 4, 0);
+	matrix_init(&P, 4, 4);
 	matrix_setList(&P, "1,0,0,0,""0,1,0,0,""0,0,0,0,""0,0,0,1,");
 	matrix_setEntry(&P, 3, 2, (double)(-1 / 10.0));			// set distance from yx plane
 
 	//coords matrix is form P*V
-	matrix_init(&coords, P.rows, V.cols, 0);
+	matrix_init(&coords, P.rows, V.cols);
+	CLEAR_MATRIX(&coords, 0);
 
 	//rotation matrix setup, rotate clockwise y axis
-	matrix_init(&Rotatey, 4, 4, 0);
+	matrix_init(&Rotatey, 4, 4);
 	matrix_setAllDiagonals(&Rotatey, 1);
 	matrix_setEntry(&Rotatey, 0, 0, xcosine(15));
 	matrix_setEntry(&Rotatey, 2, 0, xsine(15));
@@ -42,7 +38,7 @@ int main(void) {
 	matrix_setEntry(&Rotatey, 2, 2, xcosine(15));
 
 	//rotation matrix setup, rotate clockwise x axis
-	matrix_init(&Rotatex, 4, 4, 0);
+	matrix_init(&Rotatex, 4, 4);
 	matrix_setAllDiagonals(&Rotatex, 1);
 	matrix_setEntry(&Rotatex, 1, 1,  xcosine(15));
 	matrix_setEntry(&Rotatex, 2, 1,  xsine(15));

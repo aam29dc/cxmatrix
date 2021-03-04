@@ -16,6 +16,14 @@ typedef struct {
 
 #define ROW_MAJOR   (1)
 
+#define CLEAR_MATRIX(A, val) \
+do{\
+    size_t i = 0; \
+    for(i=0;i<(*A).rows*(*A).cols;i++){ \
+        (*A).m[i] = (val); \
+    }\
+}while(0)
+
 // matrix operations
 int matrix_LUfactor(const MATRIX* const A, MATRIX* const R);
 int matrix_inverse(const MATRIX* const A, MATRIX* const R);
@@ -84,7 +92,7 @@ static inline int matrix_swapCol(MATRIX* const A, const size_t x, const size_t y
 	return vector_swapEntrys(A->m, A->rows*A->cols, x, y, A->rows, A->cols);
 }
 
-int matrix_init(MATRIX* const A, const size_t rows, const size_t cols, const double val);
+int matrix_init(MATRIX* const A, const size_t rows, const size_t cols);
 int matrix_free_data(MATRIX* const A);
 
 static inline int matrix_setList(MATRIX* const A, const char* const list) {
@@ -108,7 +116,6 @@ static inline int matrix_setAllCol(MATRIX* const A, const size_t col, const doub
 	if (col > A->cols) return ERR_PARA;
 	return vector_setAll(A->m+col, A->cols*A->rows, val, A->cols);
 }
-
 int matrix_setAllDiagonals(MATRIX* const A, const double val);
 
 static inline int matrix_setEqualMatrix(MATRIX* const A, const MATRIX* const B) {

@@ -12,7 +12,8 @@ int matrix_appendRHS(MATRIX* const A, const MATRIX* const B) {
 	if (A == NULL || B == NULL) return ERR_NUL;
 	if (A->rows != B->rows) return ERR_DIM;
 
-	if (matrix_init(&temp, A->rows, A->cols + B->cols,0)) return ERR_INIT;
+	if (matrix_init(&temp, A->rows, A->cols + B->cols)) return ERR_INIT;
+	CLEAR_MATRIX(&temp, 0);
 
 	//put A on LHS of temp
 	for (; i < A->rows * A->cols; i++) {
@@ -246,7 +247,7 @@ int matrix_LUfactor(const MATRIX* const A, MATRIX* const R) {
 	if (B.m == NULL) return ERR_NUL;
 
 	// R is compact form of LU with L lower form of R and U upper form
-	if (matrix_init(R, A->rows, A->cols, 0)) return ERR_INIT;
+	if (matrix_init(R, A->rows, A->cols)) return ERR_INIT;
 
 	//EF(A) without row swaps, from top down, left to right, if 0 is along diagonal LU factor DNE
 	while (i < B.cols - 1) {
@@ -327,7 +328,9 @@ int matrix_REF(MATRIX* const A, const bool is_eform) {
 }
 
 int matrix_inverse(const MATRIX* const A, MATRIX* const R) {
-	//slow solution, and requires twice the space. uses a super augmented matrix [A | I]
+	//AB=C => [c1 ... cn ] = [Ab1 ... Abn], solve Ab1 = c1 instead of using large matrix, [ M ] = [ A | I ] ~ [ I | A_inv ]
+	//LU factorization, then forward and back substitution
+	//uses a super augmented matrix [A | I]
 	size_t i = 0;
 	size_t j = 0;
 	MATRIX temp = { 0 };
@@ -342,7 +345,8 @@ int matrix_inverse(const MATRIX* const A, MATRIX* const R) {
 
 	//#123: if A contains a zero col or zero row then A_inv DNE since A doesnt reduce to Identity, return 1;
 
-	if (matrix_init(&temp, A->rows, 2 * A->cols,0)) return ERR_INIT;
+	if (matrix_init(&temp, A->rows, 2 * A->cols)) return ERR_INIT;
+	CLEAR_MATRIX(&temp, 0);
 	//copy values of A to temp on LHS for a matrix form [temp] = [A | I]
 	for (; j < A->rows; j++) {
 		for (i = 0; i < A->cols; i++) {
@@ -363,7 +367,7 @@ int matrix_inverse(const MATRIX* const A, MATRIX* const R) {
 	//#123: if LHS != Identity then A_inv DNE, return 1;
 
 	//put RHS of temp into R matrix
-	if (matrix_init(R,A->rows,A->cols,0)) return ERR_INIT;
+	if (matrix_init(R,A->rows,A->cols)) return ERR_INIT;
 
 	j = 1;
 	for (i = 0; i < A->rows * A->cols; i++) {
@@ -381,7 +385,7 @@ int matrix_getCofactor(const MATRIX* const A, const size_t row, const size_t col
 	size_t j = 0;
 	if (A == NULL || R == NULL) return ERR_NUL;
 
-	if (matrix_init(R,A->rows - 1,A->cols - 1,0)) return ERR_INIT;
+	if (matrix_init(R, A->rows - 1, A->cols - 1)) return ERR_INIT;
 
 	//go through A[i] skipping the corresponding row and cols, put values into R[j]
 	while (i < A->rows * A->cols) {
@@ -392,7 +396,7 @@ int matrix_getCofactor(const MATRIX* const A, const size_t row, const size_t col
 		}
 
 		//skip corresponding cols
-		if ((int)(i - col) % (int)(A->cols) == 0) {
+		if ((int)(i - col) % (int)(A->cols) == 0) {			//#123: why (int) ?
 			i++;
 			continue;
 		}
@@ -457,7 +461,8 @@ int matrix_transpose(MATRIX* const A) {
 		return 0;
 	}
 
-	if (matrix_init(&T, A->cols, A->rows,0)) return ERR_INIT;
+	if (matrix_init(&T, A->cols, A->rows)) return ERR_INIT;
+	CLEAR_MATRIX(&T, 0);
 
 	for (; j < A->cols; j++) {
 		for (i = 0; i < A->rows; i++) {
@@ -484,7 +489,8 @@ int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const 
 	if (A->rows == 0 || A->cols == 0) return ERR_ZERO;
 	if (A->cols != B->rows) return ERR_DIM;
 
-	if (matrix_init(&temp, A->rows, B->cols,0)) return ERR_INIT;
+	if (matrix_init(&temp, A->rows, B->cols)) return ERR_INIT;
+    CLEAR_MATRIX(&temp, 0);
 
 	for (k = 0; k < A->rows; k++) {
 		for (j = 0; j < B->cols; j++) {
@@ -493,8 +499,8 @@ int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const 
 			}
 		}
 	}
-	
-	if (matrix_init(R, temp.rows, temp.cols, 0)) return ERR_INIT;
+
+	if (matrix_init(R, temp.rows, temp.cols)) return ERR_INIT;
 	if (vector_setEntrysEqual(temp.m, temp.rows*temp.cols, R->m, R->rows*R->cols, temp.rows*temp.cols, ROW_MAJOR)) return ERR_FUNC;
 
 	matrix_free_data(&temp);
@@ -502,23 +508,17 @@ int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const 
 	return 0;
 }
 
-int matrix_init(MATRIX* const A, const size_t rows, const size_t cols, const double val) {
-	size_t i = 0;
-
+int matrix_init(MATRIX* const A, const size_t rows, const size_t cols) {
 	if (A == NULL) return ERR_NUL;
 	if (rows == 0 || cols == 0) return ERR_PARA;
 
 	if (A->rows * A->cols < rows*cols || A->rows * A->cols > rows*cols + X_MEMORY_RANGE) {
 		if (A->m != NULL) free(A->m);
-		if ((A->m = (double*)malloc(sizeof(double)*(rows*cols))) == NULL) return ERR_INIT;
+		if ((A->m = (double*)malloc(sizeof(double)*(rows*cols))) == NULL) return ERR_INIT;			//#pragma warning (disable : 6386 ) /* disable unknown pragma warnings */
 	}
 
 	A->rows = rows;
 	A->cols = cols;
-
-	for (i=0; i < (A->rows * A->cols); i++) {
-		A->m[i] = val;
-	}
 
 	return 0;
 }

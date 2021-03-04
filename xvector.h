@@ -17,16 +17,16 @@ typedef unsigned int size_t;
 #endif
 
 #define X_MEMORY_RANGE    (4)		/* upper limit for malloc. this shouldn't be negative. instead of reallocing if the lengths aren't equal, */
-					/* reallocate if the length of A is less than B (required), or A has X more than B cells allocated. */
+                                    /* reallocate if the length of A is less than B (required), or A has X more than B cells allocated. */
 
 #define REALLOCATE(R, Rlength, length) \
-    do{\
-        if ((Rlength) < (length) || (Rlength) > (length) + X_MEMORY_RANGE) { \
-            if ((R) != NULL) free((R)); \
-            if (((R) = (double*)malloc(sizeof(double)*(length))) == NULL) return ERR_INIT; \
-            (Rlength) = (length); \
-        }\
-    }while(0)
+do{\
+    if ((Rlength) < (length) || (Rlength) > (length) + X_MEMORY_RANGE) { \
+        if ((R) != NULL) free((R)); \
+        if (((R) = (double*)malloc(sizeof(double)*(length))) == NULL) return ERR_INIT; \
+        (Rlength) = (length); \
+    }\
+}while(0)
 
 // vector_sort
 // vector_reverse
