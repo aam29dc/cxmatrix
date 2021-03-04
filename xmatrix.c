@@ -490,7 +490,7 @@ int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const 
 	if (A->cols != B->rows) return ERR_DIM;
 
 	if (matrix_init(&temp, A->rows, B->cols)) return ERR_INIT;
-    CLEAR_MATRIX(&temp, 0);
+	CLEAR_MATRIX(&temp, 0);
 
 	for (k = 0; k < A->rows; k++) {
 		for (j = 0; j < B->cols; j++) {
