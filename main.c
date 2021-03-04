@@ -63,7 +63,7 @@ int main(void) {
 		//	rotate vertices around y axis
 		matrix_multiply(&Rotatey, &V, &V);
 
-		//getchar();    /* uncomment getchar() to require user to hit enter after every fram */
+		//getchar();    /* uncomment getchar() to require user to hit enter after every frame */
 
 		#ifdef _WIN32
             system("cls");
