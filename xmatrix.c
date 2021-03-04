@@ -327,10 +327,7 @@ int matrix_REF(MATRIX* const A, const bool is_eform) {
 }
 
 int matrix_inverse(const MATRIX* const A, MATRIX* const R) {
-	//slow solution, and requires twice the space.
-	//AB=C => [c1 ... cn ] = [Ab1 ... Abn], solve Ab1 = c1 instead of using large matrix, [ M ] = [ A | I ] ~ [ I | A_inv ]
-	//LU factorization, then forward and back substitution
-	//uses a super augmented matrix [A | I]
+	//slow solution, and requires twice the space. uses a super augmented matrix [A | I]
 	size_t i = 0;
 	size_t j = 0;
 	MATRIX temp = { 0 };
