@@ -494,12 +494,8 @@ int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const 
 		}
 	}
 	
-	if (R->cols*R->rows < temp.rows*temp.cols || R->cols*R->rows > temp.rows*temp.cols + X_MEMORY_RANGE) {
-		if (matrix_setEqualMatrix(&temp, R)) return ERR_FUNC;
-	}
-	else {
-		if (vector_setEntrysEqual(temp.m, temp.rows*temp.cols, R->m, R->rows*R->cols, temp.rows*temp.cols, ROW_MAJOR)) return ERR_FUNC;
-	}
+	if (matrix_init(R, temp.rows, temp.cols, 0)) return ERR_INIT;
+	if (vector_setEntrysEqual(temp.m, temp.rows*temp.cols, R->m, R->rows*R->cols, temp.rows*temp.cols, ROW_MAJOR)) return ERR_FUNC;
 
 	matrix_free_data(&temp);
 
