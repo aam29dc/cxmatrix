@@ -392,7 +392,7 @@ int matrix_getCofactor(const MATRIX* const A, const size_t row, const size_t col
 		}
 
 		//skip corresponding cols
-		if ((int)(i - col) % (int)(A->cols) == 0) {			//#123: why (int) ?
+		if ((int)(i - col) % (int)(A->cols) == 0) {
 			i++;
 			continue;
 		}
