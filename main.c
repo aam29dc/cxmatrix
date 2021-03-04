@@ -12,6 +12,7 @@ int main(void) {
 
 	//vertices matrix setup
 	matrix_init(&V, 4, 8);
+	CLEAR_MATRIX(&V, 0);
 	matrix_setList(&V, "5,-5,-5,5,""5,-5,-5,5,""5,5,-5,-5,""5,5,-5,-5,"
                 "5,5,5,5,""-4,-4,-4,-4,""1,1,1,1,""1,1,1,1,");
 
@@ -22,6 +23,7 @@ int main(void) {
 
 	//projection matrix setup
 	matrix_init(&P, 4, 4);
+	CLEAR_MATRIX(&P, 0);
 	matrix_setList(&P, "1,0,0,0,""0,1,0,0,""0,0,0,0,""0,0,0,1,");
 	matrix_setEntry(&P, 3, 2, (double)(-1 / 10.0));			// set distance from yx plane
 
@@ -31,6 +33,7 @@ int main(void) {
 
 	//rotation matrix setup, rotate clockwise y axis
 	matrix_init(&Rotatey, 4, 4);
+	CLEAR_MATRIX(&Rotatey, 0);
 	matrix_setAllDiagonals(&Rotatey, 1);
 	matrix_setEntry(&Rotatey, 0, 0, xcosine(15));
 	matrix_setEntry(&Rotatey, 2, 0, xsine(15));
@@ -39,6 +42,7 @@ int main(void) {
 
 	//rotation matrix setup, rotate clockwise x axis
 	matrix_init(&Rotatex, 4, 4);
+	CLEAR_MATRIX(&Rotatex, 0);
 	matrix_setAllDiagonals(&Rotatex, 1);
 	matrix_setEntry(&Rotatex, 1, 1,  xcosine(15));
 	matrix_setEntry(&Rotatex, 2, 1,  xsine(15));
@@ -59,7 +63,7 @@ int main(void) {
 		//	rotate vertices around y axis
 		matrix_multiply(&Rotatey, &V, &V);
 
-		//getchar();    /* uncomment getchar() to require user to hit enter after every frame */
+		//(void)getchar();    /* uncomment getchar() to require user to hit enter after every frame */
 
 		#ifdef _WIN32
 			system("cls");
