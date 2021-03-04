@@ -2,6 +2,9 @@
 #include "xdraw.h"
 #include "xadj.h"
 
+/* author: aam29dc@gmail.com
+ projects rotated 3d cube on y and x axis onto screen */
+
 int main(void) {
 	MATRIX V = { 0 };			// vertices matrix
 	MATRIX P = { 0 };			// projection matrix
