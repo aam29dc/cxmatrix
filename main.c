@@ -33,18 +33,18 @@ int main(void) {
 	//rotation matrix setup, rotate clockwise y axis
 	matrix_init(&Rotatey, 4, 4, 0);
 	matrix_setAllDiagonals(&Rotatey, 1);
-	matrix_setEntry(&Rotatey, 0, 0, (sqrtf(6) + sqrtf(2)) / 4);	// cos(15 deg)
-	matrix_setEntry(&Rotatey, 2, 0, (sqrtf(6) - sqrtf(2)) / 4);	// sin(15 deg)
-	matrix_setEntry(&Rotatey, 0, 2, -(sqrtf(6) - sqrtf(2)) / 4);	// -sin(15 deg)
-	matrix_setEntry(&Rotatey, 2, 2, (sqrtf(6) + sqrtf(2)) / 4);	// cos(15 deg)
+	matrix_setEntry(&Rotatey, 0, 0, xcosine(15));
+	matrix_setEntry(&Rotatey, 2, 0, xsine(15));
+	matrix_setEntry(&Rotatey, 0, 2, -xsine(15));
+	matrix_setEntry(&Rotatey, 2, 2, xcosine(15));
 
 	//rotation matrix setup, rotate clockwise x axis
 	matrix_init(&Rotatex, 4, 4, 0);
 	matrix_setAllDiagonals(&Rotatex, 1);
-	matrix_setEntry(&Rotatex, 1, 1, (sqrtf(6) + sqrtf(2)) / 4);	// cos(15 deg)
-	matrix_setEntry(&Rotatex, 2, 1, (sqrtf(6) - sqrtf(2)) / 4);	// sin(15 deg)
-	matrix_setEntry(&Rotatex, 1, 2, -(sqrtf(6) - sqrtf(2)) / 4);	// -sin(15 deg)
-	matrix_setEntry(&Rotatex, 2, 2, (sqrtf(6) + sqrtf(2)) / 4);	// cos(15 deg)
+	matrix_setEntry(&Rotatex, 1, 1,  xcosine(15));
+	matrix_setEntry(&Rotatex, 2, 1,  xsine(15));
+	matrix_setEntry(&Rotatex, 1, 2,  -xsine(15));
+	matrix_setEntry(&Rotatex, 2, 2,  xcosine(15));
 
 	while (1) {
 		//	multiply vertices by projection matrix
