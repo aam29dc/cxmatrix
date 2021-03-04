@@ -8,3 +8,5 @@ and contains a list of linear algebra functions to solve matrix equations.
 (3d cube on x and y axis, (z orthongonal to x and y))
 
 ![cube](https://user-images.githubusercontent.com/73267302/109907072-9486ac00-7c6f-11eb-80f4-80105f3fdb45.gif)
+
+this is a finished project
