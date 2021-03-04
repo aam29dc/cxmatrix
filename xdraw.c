@@ -13,8 +13,8 @@ int drawAxis(const short div) {
 	for (; coord.Y < HEIGHT + SHIFT; coord.Y++) {
 		#ifdef _WIN32
 			SetConsoleCursorPosition(hConsole, coord);
-        #else
-            printf("\033[%d;%dH",coord.Y,coord.X);
+		#else
+			printf("\033[%d;%dH",coord.Y,coord.X);
 		#endif
 		if (((HEIGHT / 2) - (coord.Y - SHIFT)) % div == 0) {
 			printf("%c", 176);
