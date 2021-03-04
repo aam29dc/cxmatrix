@@ -494,7 +494,7 @@ int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const 
 		}
 	}
 	
-	if(R->cols*R->rows < temp.rows*temp.cols || R->cols*R->rows > temp.rows*temp.cols + X_MEMORY_RANGE) {
+	if (R->cols*R->rows < temp.rows*temp.cols || R->cols*R->rows > temp.rows*temp.cols + X_MEMORY_RANGE) {
 		if (matrix_setEqualMatrix(&temp, R)) return ERR_FUNC;
 	}
 	else {
