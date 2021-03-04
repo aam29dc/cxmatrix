@@ -493,13 +493,12 @@ int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const 
 			}
 		}
 	}
-
-	// check if R is already allocated
-	if (R->cols*R->rows >= A->rows*B->cols) {
-		if (matrix_setEqualValues(&temp, R)) return ERR_FUNC;
+	
+	if(R->cols*R->rows < temp.rows*temp.cols || R->cols*R->rows > temp.rows*temp.cols + X_MEMORY_RANGE) {
+		if (matrix_setEqualMatrix(&temp, R)) return ERR_FUNC;
 	}
 	else {
-		if (matrix_setEqualMatrix(&temp, R)) return ERR_FUNC;
+		if (vector_setEntrysEqual(temp.m, temp.rows*temp.cols, R->m, R->rows*R->cols, temp.rows*temp.cols, ROW_MAJOR)) return ERR_FUNC;
 	}
 
 	matrix_free_data(&temp);
