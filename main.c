@@ -15,7 +15,6 @@ int main(void) {
 
 	//vertices matrix setup
 	matrix_init(&V, 4, 8);
-	CLEAR_MATRIX(&V, 0);
 	matrix_setList(&V, "5,-5,-5,5,""5,-5,-5,5,""5,5,-5,-5,""5,5,-5,-5,"
                 "5,5,5,5,""-4,-4,-4,-4,""1,1,1,1,""1,1,1,1,");
 
@@ -26,13 +25,11 @@ int main(void) {
 
 	//projection matrix setup
 	matrix_init(&P, 4, 4);
-	CLEAR_MATRIX(&P, 0);
 	matrix_setList(&P, "1,0,0,0,""0,1,0,0,""0,0,0,0,""0,0,0,1,");
 	matrix_setEntry(&P, 3, 2, (double)(-1 / 10.0));			// set distance from yx plane
 
 	//coords matrix is form P*V
 	matrix_init(&coords, P.rows, V.cols);
-	CLEAR_MATRIX(&coords, 0);
 
 	//rotation matrix setup, rotate clockwise y axis
 	matrix_init(&Rotatey, 4, 4);
