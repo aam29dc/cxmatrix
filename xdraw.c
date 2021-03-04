@@ -37,8 +37,6 @@ int drawAxis(const short div) {
 		else printf("%c", 250);
 	}
 
-	//drawBounds
-
 	return 0;
 }
 
