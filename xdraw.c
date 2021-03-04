@@ -36,7 +36,6 @@ int drawAxis(const short div) {
 		}
 		else printf("%c", 250);
 	}
-
 	return 0;
 }
 
@@ -245,13 +244,5 @@ int matrix_print(const MATRIX* const A, const short v_offset) {
 		printf(" %.4f ", A->m[i]);
 	}
 	printf("\n");
-	/*coord.X = 0;
-	coord.Y = 0;
-	#ifdef _WIN32
-		SetConsoleCursorPosition(hConsole, coord);
-	#else
-		printf("\033[%d;%dH",coord.Y,coord.X);
-	#endif*/
-
 	return 0;
 }
