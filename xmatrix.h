@@ -16,10 +16,6 @@ typedef struct {
 
 #define ROW_MAJOR   (1)
 
-/* for faster performance we don't initialize values to zero before using them, this has the draw back that */
-/* the user must clear the contents when first allocating memory to the matrix, */
-/* be sure to call CLEAR_MATRIX after matrix_init when allocating new storage */
-
 #define CLEAR_MATRIX(A, val) \
 do{\
     size_t i = 0; \

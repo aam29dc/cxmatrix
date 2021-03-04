@@ -50,10 +50,10 @@ int matrix_solveOrthogonal(const MATRIX* const Q, const double* const B, double*
 
 	for (;i<Q->rows;i++){
 		matrix_getCol(Q,i,&col,&colsize);
-		*R[i] = vector_dotProduct(B,col,colsize);
+		(*R)[i] = vector_dotProduct(B,col,colsize);
 		/* if matrix is orthonormal, then denom = 1 for all, and this step can be skipped */
 		if ((denominator = vector_dotProduct(col,col,colsize)) == 0) { return ERR_DIVZ;}
-		else { *R[i] /= denominator; }
+		else { (*R)[i] /= denominator; }
 	}
 
 	free(col);
@@ -73,12 +73,12 @@ int matrix_solveBackward(const MATRIX* const U, const double* const B, double** 
 
 	for (i = U->rows-1; i >= 0; i--) {
 		if (U->m[(U->cols*i)+i] != 0) {	//if coef in U is zero then skip, r value will stay zero
-			*R[i] = B[i];
+			(*R)[i] = B[i];
 			// negative increment sum S: from:(j=2) down to:( i+1): S(x_j)*(a_ij)
 			for(j=U->rows-1;(int)j>i;j--){
-				*R[i] += *R[j] * (U->m[(U->cols*i)+j]);
+				(*R)[i] += (*R)[j] * (U->m[(U->cols*i)+j]);
 			}
-			*R[i] /= U->m[(U->cols*i)+i];
+			(*R)[i] /= U->m[(U->cols*i)+i];
 		}
 	}
 
@@ -97,11 +97,11 @@ int matrix_solveForward(const MATRIX* const L, const double* const B, double** c
 
 	for(;i<L->rows-1;i++){
 		if (L->m[(L->cols*i)+i] != 0) {	//if coef in A is zero then skip, r value will stay zero
-			*R[i] = B[i];
+			(*R)[i] = B[i];
 			for (j=0; j < i-1;j++) {
-				*R[i] += *R[j] * (L->m[(L->cols*i)+j]);
+				(*R)[i] += (*R)[j] * (L->m[(L->cols*i)+j]);
 			}
-			*R[i] /= L->m[(L->cols*i)+i];
+			(*R)[i] /= L->m[(L->cols*i)+i];
 		}
 	}
 
@@ -128,12 +128,12 @@ int matrix_solveSeidel(MATRIX* const A, double* const B, double** const R, size_
 
 		for (i = 0;i < A->rows;i++){
 			if (A->m[(A->cols*i)+i] != 0){
-				*R[i] = B[i];
+				(*R)[i] = B[i];
 				for (j = 0;j < A->rows;j++){
 					if(j == i) continue;
-					*R[i] -= A->m[(A->cols*i)+j] * (*R[j]);
+					(*R)[i] -= A->m[(A->cols*i)+j] * ((*R)[j]);
 				}
-				*R[i] /= A->m[(A->cols*i)+i];
+				(*R)[i] /= A->m[(A->cols*i)+i];
 			}
 			else return ERR_PARA;
 		}
@@ -470,13 +470,12 @@ int matrix_transpose(MATRIX* const A) {
 		}
 	}
 
-	if (matrix_setEqualValues(&T, A)) return ERR_FUNC;
+	if (matrix_setEqualValues(A, &T)) return ERR_FUNC;
 
 	matrix_free_data(&T);
 
 	return 0;
 }
-
 int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const R) {
 	// R = A*B, A is left matrix, and B is right matrix
 	// A.rows = B.cols , A.cols = B.rows
@@ -514,7 +513,7 @@ int matrix_init(MATRIX* const A, const size_t rows, const size_t cols) {
 
 	if (A->rows * A->cols < rows*cols || A->rows * A->cols > rows*cols + X_MEMORY_RANGE) {
 		if (A->m != NULL) free(A->m);
-		if ((A->m = (double*)malloc(sizeof(double)*(rows*cols))) == NULL) return ERR_INIT;
+		if ((A->m = (double*)malloc(sizeof(double)*(rows*cols))) == NULL) return ERR_INIT;			//#pragma warning (disable : 6386 ) /* disable unknown pragma warnings */
 	}
 
 	A->rows = rows;
@@ -576,7 +575,7 @@ int matrix_getDiagonal(const MATRIX* const A, double** R, size_t* const Rsize) {
     	REALLOCATE(*R, *Rsize, n);
 
 	for (;i<n;i++){
-		*R[i] = A->m[(A->cols*i)+i];
+		(*R)[i] = A->m[(A->cols*i)+i];
 	}
 
 	return 0;

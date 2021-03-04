@@ -40,7 +40,7 @@ int vector_add(const double* const A, const size_t Alength, const double* const 
 	REALLOCATE(*R, *Rsize, Alength);
 
 	for (; i < Alength; i++) {
-		*R[i] = A[i] + B[i];
+		(*R)[i] = A[i] + B[i];
 	}
 
 	return 0;
@@ -55,7 +55,7 @@ int vector_subtract(const double* const A, const size_t Alength, const double* c
 	REALLOCATE(*R, *Rsize, Alength);
 
 	for (; i < Alength; i++) {
-		*R[i] = A[i] - B[i];
+		(*R)[i] = A[i] - B[i];
 	}
 
 	return 0;
@@ -78,9 +78,9 @@ int vector3_cross(const double* const A, const double* const B, double** const R
 
 	REALLOCATE(*R, *length, 3);
 
-	*R[0] = A[1] * B[2] - A[2] * B[1];
-	*R[1] = -(A[0] * B[2] - A[2] * B[0]);
-	*R[2] = A[0] * B[1] - A[1] * B[0];
+	(*R)[0] = A[1] * B[2] - A[2] * B[1];
+	(*R)[1] = -(A[0] * B[2] - A[2] * B[0]);
+	(*R)[2] = A[0] * B[1] - A[1] * B[0];
 
 	return 0;
 }
@@ -194,7 +194,7 @@ int vector_setEqualArray(double** const A, size_t* const Alength, const double* 
 	REALLOCATE(*A, *Alength, Blength);
 
 	for (; i < length; i+=incr) {
-		*A[i] = B[i];
+		(*A)[i] = B[i];
 	}
 
 	return 0;
@@ -236,7 +236,7 @@ int vector_getEntrys(const double* const A, const size_t Alength, double** R, si
 	REALLOCATE(*R, *Rsize, length);
 
 	for (; i < length; i+=incr) {
-		*R[i] = A[i];
+		(*R)[i] = A[i];
 	}
 
 	return 0;
