@@ -497,8 +497,9 @@ int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const 
 		}
 	}
 
-	if (R->cols*R->rows == A->rows*B->cols) {			// check if R is already allocated
-	    if (matrix_setEqualValues(&temp, R)) return ERR_FUNC;
+	// check if R is already allocated
+	if (R->cols*R->rows == A->rows*B->cols) {
+		if (matrix_setEqualValues(&temp, R)) return ERR_FUNC;
 	}
 	else {
 		if (matrix_setEqualMatrix(&temp, R)) return ERR_FUNC;
