@@ -9,9 +9,6 @@
 #ifdef _WIN32
 	#include <Windows.h>
 #else
-	typedef int BOOL;
-	enum { FALSE = 0, TRUE = 1 };
-
 	typedef short int SHORT;
 
 	typedef struct _COORD {
