@@ -66,10 +66,10 @@ int main(void) {
 		//getchar();    /* uncomment getchar() to require user to hit enter after every frame */
 
 		#ifdef _WIN32
-            system("cls");
-        #else
-            clearScreen();
-        #endif
+			system("cls");
+		#else
+			clearScreen();
+		#endif
 	}
 	matrix_free_data(&V);
 	matrix_free_data(&P);
