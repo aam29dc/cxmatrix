@@ -217,7 +217,6 @@ int fillTriangle(int x1, int y1, int x2, int y2, int x3, int y3) {
 			//getchar();
 			//y = y2 + m * (i - x2);
 			for (j = 0; j < dy; j++) {
-
 				if (m >= 0) {
 					drawLine(x1, y1, i, xroundf(y2 + m * (i - x2)) + j);
 				}
