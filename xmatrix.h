@@ -108,6 +108,7 @@ static inline int matrix_setAllCol(MATRIX* const A, const size_t col, const doub
 	if (col > A->cols) return ERR_PARA;
 	return vector_setAll(A->m+col, A->cols*A->rows, val, A->cols);
 }
+
 int matrix_setAllDiagonals(MATRIX* const A, const double val);
 
 static inline int matrix_setEqualMatrix(MATRIX* const A, const MATRIX* const B) {
