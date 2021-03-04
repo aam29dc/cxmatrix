@@ -145,26 +145,26 @@ static inline int matrix_getCol(const MATRIX* const A, const size_t col, double*
 int matrix_getDiagonal(const MATRIX* const A, double** R, size_t* const Rsize);
 int matrix_getCofactor(const MATRIX* const A, const size_t row, const size_t col, MATRIX* const R);
 
-static inline double matrix_retRowMin(const MATRIX* const A, const size_t row, ERR* const err) {
-	if (A == NULL || err == NULL) {	return 0;}
-	return vector_retMin((A->m)+(A->cols*row), A->cols, ROW_MAJOR, err);
+static inline double matrix_retRowMin(const MATRIX* const A, const size_t row) {
+	if (A == NULL) {	return 0;}
+	return vector_retMin((A->m)+(A->cols*row), A->cols, ROW_MAJOR);
 }
-static inline double matrix_retColMin(const MATRIX* const A, const size_t col, ERR* const err) {
-	if (A == NULL || err == NULL) {	return 0;}
-	return vector_retMin(A->m+col, A->rows*A->cols, A->cols, err);
-}
-
-static inline double matrix_retRowMax(const MATRIX* const A, const size_t row, ERR* const err) {
-	if (A == NULL || err == NULL) {	return 0;}
-	return vector_retMax((A->m)+(A->cols*row), A->cols, ROW_MAJOR, err);
-}
-static inline double matrix_retColMax(const MATRIX* const A, const size_t col, ERR* const err) {
-	if (A == NULL || err == NULL){	return 0;}
-	return vector_retMax(A->m+col, A->rows*A->cols, A->cols, err);
+static inline double matrix_retColMin(const MATRIX* const A, const size_t col) {
+	if (A == NULL) {	return 0;}
+	return vector_retMin(A->m+col, A->rows*A->cols, A->cols);
 }
 
-double matrix_retSparsity(const MATRIX* const A, ERR* const err);
-double matrix_retTrace(const MATRIX* const A, ERR* const err);
+static inline double matrix_retRowMax(const MATRIX* const A, const size_t row) {
+	if (A == NULL) {	return 0;}
+	return vector_retMax((A->m)+(A->cols*row), A->cols, ROW_MAJOR);
+}
+static inline double matrix_retColMax(const MATRIX* const A, const size_t col) {
+	if (A == NULL) {	return 0;}
+	return vector_retMax(A->m+col, A->rows*A->cols, A->cols);
+}
+
+double matrix_retSparsity(const MATRIX* const A);
+double matrix_retTrace(const MATRIX* const A);
 
 // matrix_isIndependent
 bool matrix_isInvertible(const MATRIX* const A);

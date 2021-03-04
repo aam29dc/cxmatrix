@@ -36,7 +36,7 @@ int vector_add(const double* const A, const size_t Alength, const double* const 
 int vector_subtract(const double* const A, const size_t Alength, const double* const B, const size_t Blength, double** R, size_t* Rsize);
 int vector_multiply_s(double* const A, const size_t length, const double scalar, const size_t incr);
 int vector3_cross(const double* const A, const double* const B, double** const R, size_t* const length);
-double vector_angle(const double* const A, const double* const B, const size_t length, ERR* const err);
+double vector_angle(const double* const A, const double* const B, const size_t length);
 int vector_normalize(double* const A, const size_t length);
 double vector_dotProduct(const double* const A, const double* const B, const size_t length);
 static inline double vector_length(const double* const A, const size_t length) {
@@ -49,8 +49,8 @@ int vector_setAll(double* const A, const size_t length, const double val, const 
 int vector_setEqualArray(double** const A, size_t* const Alength, const double* const B, const size_t Blength, const size_t length, const size_t incr);
 int vector_setEntrysEqual(const double* const A, const size_t Alength, double* const R, const size_t Rlength, const size_t length, const size_t incr);
 int vector_getEntrys(const double* const A, const size_t Alength, double** R, size_t* const Rsize, const size_t length, const size_t incr);
-double vector_retMin(const double* const A, const size_t length, const size_t incr, ERR* const err);
-double vector_retMax(const double* const A, const size_t length, const size_t incr, ERR* const err);
+double vector_retMin(const double* const A, const size_t length, const size_t incr);
+double vector_retMax(const double* const A, const size_t length, const size_t incr);
 
 bool vector_isEqual(const double* const A, const size_t Alength, const double* const B, const size_t Blength);
 bool vector_isZero(const double* const A, const size_t length);

@@ -553,16 +553,15 @@ int matrix_setAllDiagonals(MATRIX* const A, const double val) {
 	return 0;
 }
 
-double matrix_retSparsity(const MATRIX* const A, ERR* const err) {
+double matrix_retSparsity(const MATRIX* const A) {
 	// 1 = zero matrix, 0 = every entry is non zero
 	size_t i = 0;
 	size_t zeros = 0;
 
-	if (A == NULL || err == NULL) {
+	if (A == NULL) {
 		return 0;
 	}
 	if (A->rows == 0 || A->cols == 0) {
-		*err = ERR_ZERO;
 		return 0;
 	}
 
@@ -761,15 +760,14 @@ bool matrix_isSymmetric(const MATRIX* const A) {
 	return true;
 }
 
-double matrix_retTrace(const MATRIX* const A, ERR* const err) {
+double matrix_retTrace(const MATRIX* const A) {
 	size_t i = 0;
 	double result = 0;
 
-	if (A == NULL || err == NULL) {
+	if (A == NULL) {
 		return 0;
 	}
 	if (A->rows == 0 || A->cols == 0) {
-		*err = ERR_ZERO;
 		return 0;
 	}
 

@@ -1,11 +1,10 @@
 #include "xvector.h"
 
-double vector_angle(const double* const A, const double* const B, const size_t length, ERR* const err) {
-	if (A == NULL || B == NULL || err == NULL) {
+double vector_angle(const double* const A, const double* const B, const size_t length) {
+	if (A == NULL || B == NULL) {
 		return 0;
 	}
 	if (length == 0) {
-		*err = ERR_ZERO;
 		return 0;
 	}
 
@@ -116,11 +115,11 @@ double vector_dotProduct(const double* const A, const double* const B, const siz
 	return result;
 }
 
-double vector_distance(const double* const A, const double* const B, const size_t length, ERR* const err) {
+double vector_distance(const double* const A, const double* const B, const size_t length) {
 	size_t i = 0;
 	double result = 0;
 
-	if (A == NULL || B == NULL || err == NULL) {
+	if (A == NULL || B == NULL) {
 		return 0;
 	}
 
@@ -243,15 +242,14 @@ int vector_getEntrys(const double* const A, const size_t Alength, double** R, si
 	return 0;
 }
 
-double vector_retMax(const double* const A, const size_t length, const size_t incr, ERR* const err) {
+double vector_retMax(const double* const A, const size_t length, const size_t incr) {
 	size_t i = 0;
 	double max = 0;
 
-	if (A == NULL || err == NULL) {
+	if (A == NULL) {
 		return 0;
 	}
 	if (incr == 0) {
-		*err = ERR_ZERO;
 		return 0;
 	}
 
@@ -264,15 +262,14 @@ double vector_retMax(const double* const A, const size_t length, const size_t in
 	return max;
 }
 
-double vector_retMin(const double* const A, const size_t length, const size_t incr, ERR* const err) {
+double vector_retMin(const double* const A, const size_t length, const size_t incr) {
 	size_t i = 0;
 	double min = 0;
 
-	if (A == NULL || err == NULL) {
+	if (A == NULL) {
 		return 0;
 	}
 	if (incr == 0) {
-		*err = ERR_ZERO;
 		return 0;
 	}
 
