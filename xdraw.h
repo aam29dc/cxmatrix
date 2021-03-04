@@ -38,8 +38,8 @@ typedef struct {
 
 #define PIXEL   (240)
 #define SCALE	(10)
-#define WIDTH	(120)
-#define HEIGHT	(120)
+#define WIDTH	(60)
+#define HEIGHT	(60)
 #define SHIFT	(0)
 
 // draw functions that print to screen
