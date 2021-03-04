@@ -516,7 +516,6 @@ int matrix_init(MATRIX* const A, const size_t rows, const size_t cols, const dou
 
 	if (A->rows * A->cols < rows*cols || A->rows * A->cols > rows*cols + X_MEMORY_RANGE) {
 		if (A->m != NULL) free(A->m);
-//#pragma warning (disable : 6386 ) /* disable unknown pragma warnings */
 		if ((A->m = (double*)malloc(sizeof(double)*(rows*cols))) == NULL) return ERR_INIT;
 	}
 
