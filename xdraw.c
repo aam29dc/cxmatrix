@@ -142,10 +142,6 @@ int matrix_drawEdges(const MATRIX* const A, const size_t* const adj) {
 			if (adj[i + (j * A->cols)] == 1) {
 				// v1: i / A->cols == row , v2: i % A->cols == col for [3x3]
 				if (drawLine(xroundf(A->m[i]), xroundf(A->m[i + A->cols]), xroundf(A->m[j]), xroundf(A->m[j + A->cols]))) return ERR_FUNC;
-				/*
-				err = drawLine(a,b,c,d);
-				if(err!=0) return err;
-				*/
 			}
 		}
 	}
