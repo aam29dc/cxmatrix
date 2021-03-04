@@ -28,9 +28,6 @@ int main(void) {
 	matrix_setList(&P, "1,0,0,0,""0,1,0,0,""0,0,0,0,""0,0,0,1,");
 	matrix_setEntry(&P, 3, 2, (double)(-1 / 10.0));			// set distance from yx plane
 
-	//coords matrix is form P*V
-	matrix_init(&coords, P.rows, V.cols);
-
 	//rotation matrix setup, rotate clockwise y axis
 	matrix_init(&Rotatey, 4, 4);
 	CLEAR_MATRIX(&Rotatey, 0);
