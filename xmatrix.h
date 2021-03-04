@@ -70,7 +70,7 @@ static inline int matrix_subtract(const MATRIX* const A, const MATRIX* const B, 
 
 int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const R);
 
-static inline int matrix_multiply_s(const MATRIX* const A, const float scalar) {
+static inline int matrix_multiply_s(const MATRIX* const A, const double scalar) {
 	if (A == NULL) return ERR_NUL;
 	return vector_multiply_s(A->m, A->rows*A->cols, scalar, ROW_MAJOR);
 }
@@ -104,13 +104,13 @@ static inline int matrix_setList(MATRIX* const A, const char* const list) {
 	return vector_setList(A->m, A->rows*A->cols, list);
 }
 
-static inline int matrix_setEntry(MATRIX* const A, const size_t row, const size_t col, const float val) {
+static inline int matrix_setEntry(MATRIX* const A, const size_t row, const size_t col, const double val) {
     if (A == NULL) return ERR_NUL;
     if (row > A->rows || col > A->cols) return ERR_PARA;
     return vector_setAll((A->m)+(A->cols*row)+col, 1, val, ROW_MAJOR);
 }
 
-static inline int matrix_setAllRow(MATRIX* const A, const size_t row, const float val) {
+static inline int matrix_setAllRow(MATRIX* const A, const size_t row, const double val) {
 	if (A == NULL) return ERR_NUL;
 	if (row > A->rows) return ERR_PARA;
 	return vector_setAll((A->m)+(A->cols*row), A->cols, val, ROW_MAJOR);
