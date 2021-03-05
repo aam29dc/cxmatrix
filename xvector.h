@@ -46,7 +46,7 @@ static inline double vector_length(const double* const A, const size_t length) {
 int vector_swapEntrys(double* const A, const size_t Alength, const size_t x, const size_t y, const size_t length, const size_t incr);
 int vector_setList(double* const A, const size_t Alength, const char* const list);
 int vector_setAll(double* const A, const size_t length, const double val, const size_t incr);
-int vector_setEqualArray(double** const A, size_t* const Alength, const double* const B, const size_t Blength, const size_t length, const size_t incr);
+int vector_setEqualArray(double** const A, size_t* const Alength, const double* const B, const size_t Blength, const size_t length);
 int vector_setEntrysEqual(const double* const A, const size_t Alength, double* const R, const size_t Rlength, const size_t length, const size_t incr);
 int vector_getEntrys(const double* const A, const size_t Alength, double** R, size_t* const Rsize, const size_t length, const size_t incr);
 double vector_retMin(const double* const A, const size_t length, const size_t incr);
