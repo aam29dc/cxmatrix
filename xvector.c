@@ -185,7 +185,7 @@ int vector_setList(double* const A, const size_t Alength, const char* const list
 	return 0;
 }
 
-int vector_setEqualArray(double** const A, size_t* const Alength, const double* const B, const size_t Blength, const size_t length, const size_t incr) {
+int vector_setEqualArray(double** const A, size_t* const Alength, const double* const B, const size_t Blength, const size_t length) {
 	size_t i = 0;
 
 	if (A == NULL || B == NULL) return ERR_NUL;
@@ -193,7 +193,7 @@ int vector_setEqualArray(double** const A, size_t* const Alength, const double* 
 
 	REALLOCATE(*A, *Alength, Blength);
 
-	for (; i < length; i+=incr) {
+	for (; i < length; i++) {
 		(*A)[i] = B[i];
 	}
 
