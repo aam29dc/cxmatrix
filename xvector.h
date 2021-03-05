@@ -21,7 +21,7 @@ typedef unsigned int size_t;
 
 #define REALLOCATE(R, Rlength, length) \
 do{\
-    if ((Rlength) < (length) || (Rlength) > (length) + X_MEMORY_RANGE) { \
+    if ((Rlength) < (length) || (Rlength) > (length) + X_MEMORY_RANGE || R == NULL) { \
         if ((R) != NULL) free((R)); \
         if (((R) = (double*)malloc(sizeof(double)*(length))) == NULL) return ERR_INIT; \
         (Rlength) = (length); \
