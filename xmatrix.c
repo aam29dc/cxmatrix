@@ -470,7 +470,7 @@ int matrix_transpose(MATRIX* const A) {
 		}
 	}
 
-	if (matrix_setEqualValues(A, &T)) return ERR_FUNC;
+	if (matrix_setEqualMatrix(A, &T)) return ERR_FUNC;
 
 	matrix_free_data(&T);
 
