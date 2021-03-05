@@ -120,11 +120,14 @@ int matrix_setAllDiagonals(MATRIX* const A, const double val);
 
 static inline int matrix_setEqualMatrix(MATRIX* const A, const MATRIX* const B) {
 	size_t Alength = 0;
+	ERR err = 0;
+
 	if (A == NULL || B == NULL) return ERR_NUL;
+	Alength = A->rows * A->cols;
+	err = vector_setEqualArray(&(A->m), &Alength, B->m, B->cols * B->rows, B->cols * B->rows, ROW_MAJOR);
 	A->rows = B->rows;
 	A->cols = B->cols;
-	Alength = B->cols * B->rows;
-	return vector_setEqualArray(&A->m, &Alength, B->m, B->cols * B->rows, B->cols * B->rows, ROW_MAJOR);
+	return err;
 }
 
 static inline int matrix_setEqualValues(MATRIX* const A, const MATRIX* const B) {
