@@ -228,6 +228,7 @@ int vector_setAll(double* const A, const size_t length, const double val, const 
 
 int vector_getEntrys(const double* const A, const size_t Alength, double** R, size_t* const Rsize, const size_t length, const size_t incr) {
 	size_t i = 0;
+	size_t j = 0;
 
 	if (A == NULL || R == NULL || Rsize == NULL) return ERR_NUL;
 	if (length > Alength) return ERR_PARA;
@@ -235,8 +236,8 @@ int vector_getEntrys(const double* const A, const size_t Alength, double** R, si
 
 	REALLOCATE(*R, *Rsize, length);
 
-	for (; i < length; i+=incr) {
-		(*R)[i] = A[i];
+	for (; i < length; i+=incr, j++) {
+		(*R)[j] = A[i];
 	}
 
 	return 0;
