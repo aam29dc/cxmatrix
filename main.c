@@ -3,7 +3,7 @@
 #include "xadj.h"
 
 /* author: aam29dc@gmail.com */
-/* projects rotated 3d cube on y and x axis onto screen */
+/* projects a rotated 3d cube on onto the screen */
 
 int main(void) {
 	MATRIX V = { 0 };			// vertices matrix
