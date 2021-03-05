@@ -49,19 +49,26 @@ static inline int matrix_negate(MATRIX* const A) {
 	return vector_negate(A->m, A->rows*A->cols);
 }
 
-static inline int matrix_add(const MATRIX* const A, const MATRIX* const B, MATRIX* R) {
+static inline int matrix_add(const MATRIX* const A, const MATRIX* const B, MATRIX* const R) {
 	size_t Rsize = 0;
+	ERR err = 0;
+	
 	if (A == NULL || B == NULL || R == NULL) return ERR_NUL;
+	err = vector_add(A->m, A->rows*A->cols, B->m, B->rows*B->cols, &(R->m), &Rsize);
 	R->rows = A->rows;
 	R->cols = A->cols;
-	return vector_add(A->m, A->rows*A->cols, B->m, B->rows*B->cols, &(R->m), &Rsize);
+	return err;
 }
-static inline int matrix_subtract(const MATRIX* const A, const MATRIX* const B, MATRIX* R) {
+
+static inline int matrix_subtract(const MATRIX* const A, const MATRIX* const B, MATRIX* const R) {
 	size_t Rsize = 0;
+	ERR err = 0;
+	
 	if (A == NULL || B == NULL || R == NULL) return ERR_NUL;
+	err = vector_subtract(A->m, A->rows*A->cols, B->m, B->rows*B->cols, &(R->m), &Rsize);
 	R->rows = A->rows;
 	R->cols = A->cols;
-	return vector_subtract(A->m, A->rows*A->cols, B->m, B->rows*B->cols, &(R->m), &Rsize);
+	return err;
 }
 
 int matrix_multiply(const MATRIX* const A, const MATRIX* const B, MATRIX* const R);
@@ -114,7 +121,7 @@ static inline int matrix_setAllRow(MATRIX* const A, const size_t row, const doub
 static inline int matrix_setAllCol(MATRIX* const A, const size_t col, const double val) {
 	if (A == NULL) return ERR_NUL;
 	if (col > A->cols) return ERR_PARA;
-	return vector_setAll(A->m+col, A->cols*A->rows, val, A->cols);
+	return vector_setAll((A->m)+col, A->cols*A->rows, val, A->cols);
 }
 int matrix_setAllDiagonals(MATRIX* const A, const double val);
 
@@ -137,7 +144,7 @@ static inline int matrix_setEqualValues(MATRIX* const A, const MATRIX* const B) 
 }
 static inline int matrix_setEqualCol(const MATRIX* const A, MATRIX* const R, const size_t col) {
 	if (A == NULL || R == NULL) return ERR_NUL;
-	return vector_setEntrysEqual(A->m+col, A->rows*A->cols, R->m, R->rows*R->cols, A->rows*A->cols, A->cols);
+	return vector_setEntrysEqual((A->m)+col, A->rows*A->cols, R->m, R->rows*R->cols, A->rows*A->cols, A->cols);
 }
 static inline int matrix_setEqualRow(const MATRIX* const A, MATRIX* const R, const size_t row) {
 	if (A == NULL || R == NULL) return ERR_NUL;
@@ -150,7 +157,7 @@ static inline int matrix_getRow(const MATRIX* const A, const size_t row, double*
 }
 static inline int matrix_getCol(const MATRIX* const A, const size_t col, double** R, size_t* const Rsize) {
 	if (A == NULL || R == NULL || Rsize == NULL) return ERR_NUL;
-	return vector_getEntrys(A->m+col, A->rows*A->cols, R, Rsize, A->rows, A->cols);
+	return vector_getEntrys((A->m)+col, A->rows*A->cols, R, Rsize, A->rows, A->cols);
 }
 
 int matrix_getDiagonal(const MATRIX* const A, double** R, size_t* const Rsize);
@@ -162,7 +169,7 @@ static inline double matrix_retRowMin(const MATRIX* const A, const size_t row) {
 }
 static inline double matrix_retColMin(const MATRIX* const A, const size_t col) {
 	if (A == NULL) {	return 0;}
-	return vector_retMin(A->m+col, A->rows*A->cols, A->cols);
+	return vector_retMin((A->m)+col, A->rows*A->cols, A->cols);
 }
 
 static inline double matrix_retRowMax(const MATRIX* const A, const size_t row) {
@@ -171,7 +178,7 @@ static inline double matrix_retRowMax(const MATRIX* const A, const size_t row) {
 }
 static inline double matrix_retColMax(const MATRIX* const A, const size_t col) {
 	if (A == NULL) {	return 0;}
-	return vector_retMax(A->m+col, A->rows*A->cols, A->cols);
+	return vector_retMax((A->m)+col, A->rows*A->cols, A->cols);
 }
 
 double matrix_retSparsity(const MATRIX* const A);
