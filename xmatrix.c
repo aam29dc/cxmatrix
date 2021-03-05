@@ -471,7 +471,7 @@ int matrix_transpose(MATRIX* const A) {
 	}
 
 	if (T.rows*T.cols == A->rows*A->cols) {
-		if (matrix_setEqualValues(A,&T)) return ERR_FUNC;
+		if (matrix_setEqualValues(A, &T)) return ERR_FUNC;
 	}
 	else {
 		if (matrix_setEqualMatrix(A, &T)) return ERR_FUNC;
