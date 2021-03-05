@@ -189,7 +189,7 @@ int vector_setEqualArray(double** const A, size_t* const Alength, const double* 
 	size_t i = 0;
 
 	if (A == NULL || B == NULL) return ERR_NUL;
-	if (incr == 0) return ERR_ZERO;
+	if (length > Blength) return ERR_PARA;
 
 	REALLOCATE(*A, *Alength, Blength);
 
