@@ -237,27 +237,27 @@ int matrix_LUfactor(const MATRIX* const A, MATRIX* const R) {
 	//factor only for square matrices although can work for non square matrix...
 	size_t i = 0;
 	size_t j = 0 ;
-	MATRIX B = { 0 };	// dont change A, B=A
+	MATRIX T = { 0 };	// dont change A, Temp=A
 
 	if (A == NULL || R == NULL) return ERR_NUL;
 	if (A->rows == 0 || A->cols == 0) return ERR_ZERO;
 	if (A->rows != A->cols) return ERR_DIM;
 
-	if (matrix_setEqualMatrix(&B, A)) return ERR_INIT;
-	if (B.m == NULL) return ERR_NUL;
+	if (matrix_setEqualMatrix(&T, A)) return ERR_INIT;
+	if (T.m == NULL) return ERR_NUL;
 
 	// R is compact form of LU with L lower form of R and U upper form
 	if (matrix_init(R, A->rows, A->cols)) return ERR_INIT;
 
 	//EF(A) without row swaps, from top down, left to right, if 0 is along diagonal LU factor DNE
-	while (i < B.cols - 1) {
-		if (B.m[(B.cols * i) + i] == 0) return ERR_COMP;			//check if pivot is zero
-		if (matrix_setEqualCol(&B, R, i)) return ERR_FUNC;			//copy whole pivot column
-		if (matrix_zeroBelowPivot(&B, i, i)) return ERR_FUNC;			//zero entrys under diagonal using pivot
+	while (i < T.cols - 1) {
+		if (T.m[(T.cols * i) + i] == 0) return ERR_COMP;			//check if pivot is zero
+		if (matrix_setEqualCol(&T, R, i)) return ERR_FUNC;			//copy whole pivot column
+		if (matrix_zeroBelowPivot(&T, i, i)) return ERR_FUNC;			//zero entrys under diagonal using pivot
 		i++;
 	}
 
-	if (matrix_setEqualCol(&B, R, i)) return ERR_FUNC;
+	if (matrix_setEqualCol(&T, R, i)) return ERR_FUNC;
 
 	//divide entrys under pivot cols
 	i = 0;
@@ -270,7 +270,7 @@ int matrix_LUfactor(const MATRIX* const A, MATRIX* const R) {
 		i++;
 	}
 
-	matrix_free_data(&B);
+	matrix_free_data(&T);
 
 	return 0;
 }
