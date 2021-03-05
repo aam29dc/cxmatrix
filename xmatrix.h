@@ -131,7 +131,7 @@ static inline int matrix_setEqualMatrix(MATRIX* const A, const MATRIX* const B) 
 	if (A == NULL || B == NULL) return ERR_NUL;
 	
 	Alength = A->rows * A->cols;
-	err = vector_setEqualArray(&(A->m), &Alength, B->m, B->cols * B->rows, B->cols * B->rows, ROW_MAJOR);
+	err = vector_setEqualArray(&(A->m), &Alength, B->m, B->cols * B->rows, B->cols * B->rows);
 	A->rows = B->rows;
 	A->cols = B->cols;
 	return err;
