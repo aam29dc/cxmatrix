@@ -1,6 +1,7 @@
 # cxmatrix
-cxmatrix library is row major,
-has automatic dynamic memory allocation/matrix dimension, and contains a list of linear algebra functions to solve matrix equations. If you want a static matrix, make a static array, and set the pointer in the MATRIX struct to your static array.
+cxmatrix library is row major, has automatic dynamic memory allocation/matrix dimension, and contains a list of linear algebra functions to solve matrix equations.
+
+
 
 (in main.c) is a program to project vertices of a 3d cube onto the screen, rotated on the X and Y axis. A line is drawn between corresponding vertices using an adjacecy list (xadj.h). It uses (xdraw.h) functions to draw to screen (no ncurses and no other external lib): works on windows console, there maybe printing problems on linux terminals, try to increase the size of your terminal (before it prints) if it doesn't print correctly.
 
